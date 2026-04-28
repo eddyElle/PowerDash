@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,7 +15,7 @@ public class NotesPanel extends JPanel{
         this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(205,300));
         this.setBackground(stdThings.getColor1());
-        this.setBorder(new EmptyBorder(3,8,8,8));
+        this.setBorder(stdThings.getStdMargin());
         this.add(top,BorderLayout.NORTH);
         this.top.setLayout(new GridLayout(1,3));
         this.top.setBackground(stdThings.getColor1());
