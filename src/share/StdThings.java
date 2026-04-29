@@ -30,5 +30,5 @@ public class StdThings {
     }
     public static Color getTextColor1(){
         return textColor1;
-    } 
+    }
 }
