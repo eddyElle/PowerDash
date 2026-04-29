@@ -1,4 +1,7 @@
+package src;
 import javax.swing.*;
+import src.base.LeftPanel;
+import src.base.RightPanel;
 import java.awt.*;
 public class PowerMain{
     public static void main(String[] args) {

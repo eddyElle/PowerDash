@@ -1,3 +1,4 @@
+package src.clipboard;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.*;

@@ -1,4 +1,9 @@
+package src.clipboard;
 import javax.swing.*;
+
+import src.share.Buttons;
+import src.share.StdThings;
+
 import java.awt.*;
 import java.awt.datatransfer.*;
 public class ClipboardPanel extends JPanel{
@@ -9,10 +14,10 @@ public class ClipboardPanel extends JPanel{
     private ClipBoardManager clippy = new ClipBoardManager(btn1,btn2,btn3);
     public ClipboardPanel(){
         this.setPreferredSize(new Dimension(205,148));
-        this.setBackground(stdThings.getColor1());
+        this.setBackground(StdThings.getColor1());
         this.setLayout(new GridLayout(4,0));
-        this.setBorder(stdThings.getStdMargin());
-        clipBoard.setForeground(Color.white);
+        this.setBorder(StdThings.getStdMargin());
+        clipBoard.setForeground(StdThings.getTextColor1());
         this.add(clipBoard);
         this.add(btn1);
         this.add(btn2);

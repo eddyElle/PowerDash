@@ -1,4 +1,9 @@
+package src.notes;
 import javax.swing.*;
+
+import src.share.Buttons;
+import src.share.StdThings;
+
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,13 +19,13 @@ public class NotesPanel extends JPanel{
     public NotesPanel(){
         this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(205,300));
-        this.setBackground(stdThings.getColor1());
-        this.setBorder(stdThings.getStdMargin());
+        this.setBackground(StdThings.getColor1());
+        this.setBorder(StdThings.getStdMargin());
         this.add(top,BorderLayout.NORTH);
         this.top.setLayout(new GridLayout(1,3));
-        this.top.setBackground(stdThings.getColor1());
+        this.top.setBackground(StdThings.getColor1());
         this.top.setPreferredSize(new Dimension(50,20));
-        this.notes.setForeground(Color.white);
+        this.notes.setForeground(StdThings.getTextColor1());
         this.notes.setPreferredSize(new Dimension(50,20));
         this.top.add(notes); 
         this.top.add(save);
@@ -31,9 +36,9 @@ public class NotesPanel extends JPanel{
         this.load.addActionListener(e -> {
             loadCont(textArea);
         });
-        textArea.setBackground(stdThings.getColor1());
-        textArea.setForeground(Color.white);
-        textArea.setCaretColor(Color.white);
+        textArea.setBackground(StdThings.getColor1());
+        textArea.setForeground(StdThings.getTextColor1());
+        textArea.setCaretColor(StdThings.getTextColor1());
         textArea.setLineWrap(true);
         this.add(textArea,BorderLayout.CENTER);
     }

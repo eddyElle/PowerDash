@@ -1,8 +1,11 @@
+package src.calc;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import net.objecthunter.exp4j.Expression;
-import net.objecthunter.exp4j.ExpressionBuilder; 
+import net.objecthunter.exp4j.ExpressionBuilder;
+import src.share.Buttons;
+import src.share.StdThings;
 import java.util.ArrayList;
 public class Calc extends JPanel { //ricorda di lavorare con il .jar
     private JPanel top = new JPanel();
@@ -16,19 +19,19 @@ public class Calc extends JPanel { //ricorda di lavorare con il .jar
     private JButton calcBtn = new Buttons("=");
     private JButton clsBtn = new Buttons("C");
     public Calc(){
-        this.setPreferredSize(stdThings.getStdLeftDimension());
-        this.setBackground(stdThings.getColor1());
+        this.setPreferredSize(StdThings.getStdLeftDimension());
+        this.setBackground(StdThings.getColor1());
         this.setLayout(new BorderLayout());
         this.setBorder(new EmptyBorder(0, 8, 8, 8));
-        calc.setForeground(Color.white);
+        calc.setForeground(StdThings.getTextColor1());
         top.setLayout(new FlowLayout());
-        top.setBackground(stdThings.getColor1());
+        top.setBackground(StdThings.getColor1());
         top.add(calc);
         top.add(input);
         top.add(calcBtn);
         top.add(clsBtn);
         bottom.setLayout(new FlowLayout());
-        bottom.setBackground(stdThings.getColor1());
+        bottom.setBackground(StdThings.getColor1());
         bottom.add(dec);
         bottom.add(oct);
         bottom.add(hex);
@@ -63,29 +66,29 @@ public class Calc extends JPanel { //ricorda di lavorare con il .jar
                 if(hist == 1){
                     switch (sel) {
                         case 0:
-                            input.setForeground(Color.white);
+                            input.setForeground(StdThings.getTextColor1());
                             input.setText("Err: decToDec convertion?");
                             break;
                         case 1:
                             toConvert = fields.get(1).getText();
-                            input.setForeground(Color.white);
+                            input.setForeground(StdThings.getTextColor1());
                             input.setText(Integer.parseInt(toConvert,8) + "");
                             break;
                         case 2:
                             toConvert = fields.get(2).getText();
-                            input.setForeground(Color.white);
+                            input.setForeground(StdThings.getTextColor1());
                             input.setText(Integer.parseInt(toConvert,16) + "");
                             break;
                         case 3:
                             toConvert = fields.get(3).getText();
-                            input.setForeground(Color.white);
-                            input.setText(Integer.parseInt(toConvert,16) + "");
+                            input.setForeground(StdThings.getTextColor1());
+                            input.setText(Integer.parseInt(toConvert,2) + "");
                         default:
                             break;
                     }
                 }
                 else if(hist > 1){
-                    input.setForeground(Color.white);
+                    input.setForeground(StdThings.getTextColor1());
                     input.setText("Err: moreInputsToConvert");
                 }
             }
@@ -93,7 +96,7 @@ public class Calc extends JPanel { //ricorda di lavorare con il .jar
                 Expression e = new ExpressionBuilder(text).build();
                 double result = e.evaluate();
                 for(int i = 0;i<fields.size();i++){
-                    fields.get(i).setForeground(Color.white);
+                    fields.get(i).setForeground(StdThings.getTextColor1());
                 }
                 fields.get(0).setText(result + "");
                 Integer floored = (int)Math.round(result);
@@ -102,7 +105,7 @@ public class Calc extends JPanel { //ricorda di lavorare con il .jar
                 fields.get(3).setText(Integer.toBinaryString(floored));
             }
         } catch (Exception e) {
-            input.setForeground(Color.white);
+            input.setForeground(StdThings.getTextColor1());
             input.setText("Err: invalidExpression");
             System.out.println(e.getMessage());
         }
