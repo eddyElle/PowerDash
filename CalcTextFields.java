@@ -3,16 +3,18 @@ import java.awt.*;
 import java.awt.event.FocusListener;
 import java.awt.event.FocusEvent;
 public class CalcTextFields extends JTextField {
-    CalcTextFields(String Example, Dimension dimension){
+    private String defaultText;
+    CalcTextFields(String defaultText, Dimension dimension){
+        this.defaultText = defaultText;
         this.setPreferredSize(dimension);
         this.setBackground(stdThings.color1);
         this.setForeground(Color.gray);
         this.setCaretColor(Color.white);
-        this.setText(Example);
+        this.setText(defaultText);
         this.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-            if (CalcTextFields.this.getText().equals(Example)) {
+            if (CalcTextFields.this.getText().equals(defaultText) || CalcTextFields.this.getText().contains("Err:")) {
                 CalcTextFields.this.setText("");
                 CalcTextFields.this.setForeground(Color.white);
             }
@@ -21,9 +23,13 @@ public class CalcTextFields extends JTextField {
         public void focusLost(FocusEvent e) {
             if (CalcTextFields.this.getText().isEmpty()) {
                 CalcTextFields.this.setForeground(Color.gray);
-                CalcTextFields.this.setText(Example);
+                CalcTextFields.this.setText(defaultText);
             }
         }
         });
+    }
+    public void clearAll(){
+        this.setForeground(Color.gray);
+        this.setText(defaultText);
     }
 }

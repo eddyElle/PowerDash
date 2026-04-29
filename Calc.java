@@ -1,16 +1,20 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-public class Calc extends JPanel {
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder; 
+import java.util.ArrayList;
+public class Calc extends JPanel { //ricorda di lavorare con il .jar
     private JPanel top = new JPanel();
     private JPanel bottom = new JPanel();
     private JLabel calc = new JLabel("Calc:");
-    private JTextField input= new CalcTextFields("Es: 4+4", new Dimension(199,18));
-    private JTextField dec = new CalcTextFields("DEC" , new Dimension(45,18));
-    private JTextField hex = new CalcTextFields("HEX", new Dimension(65,18));
-    private JTextField oct = new CalcTextFields("OCT", new Dimension(45,18));
-    private JTextField bin = new CalcTextFields("BIN", new Dimension(85,18));
+    private CalcTextFields input= new CalcTextFields("Es: 4+4", new Dimension(179,18));
+    private CalcTextFields dec = new CalcTextFields("DEC" , new Dimension(45,18));
+    private CalcTextFields hex = new CalcTextFields("HEX", new Dimension(65,18));
+    private CalcTextFields oct = new CalcTextFields("OCT", new Dimension(45,18));
+    private CalcTextFields bin = new CalcTextFields("BIN", new Dimension(85,18));
     private JButton calcBtn = new Buttons("=");
+    private JButton clsBtn = new Buttons("C");
     public Calc(){
         this.setPreferredSize(stdThings.getStdLeftDimension());
         this.setBackground(stdThings.getColor1());
@@ -22,6 +26,7 @@ public class Calc extends JPanel {
         top.add(calc);
         top.add(input);
         top.add(calcBtn);
+        top.add(clsBtn);
         bottom.setLayout(new FlowLayout());
         bottom.setBackground(stdThings.getColor1());
         bottom.add(dec);
@@ -32,19 +37,85 @@ public class Calc extends JPanel {
         this.add(bottom, BorderLayout.SOUTH);
         calcBtn.addActionListener(e -> {
             doMath(input,dec,hex,oct,bin);
-        });    
+        });  
+        clsBtn.addActionListener(e -> {
+            unDoMath(input,dec,hex,oct,bin);
+        });  
     }
-    public void doMath(JTextField input, JTextField dec, JTextField hex, JTextField oct, JTextField bin){
-        String[] mathArr = new String[0];
-        String value = input.getText();
-        String regex = "(?<=[+-*/])|(?=[+-*/])";
+    public void doMath(CalcTextFields input, CalcTextFields dec, CalcTextFields hex, CalcTextFields oct, CalcTextFields bin){
+        ArrayList<CalcTextFields> fields = new ArrayList<>();
+        int hist = 0; //history
+        int sel = 0; //selector
+        String toConvert = "";
+        fields.add(dec);
+        fields.add(oct);
+        fields.add(hex);
+        fields.add(bin);
         try {
-            mathArr = value.split(regex);
-            
+            String text = input.getText(); 
+            if((text.equals("")) || (text.equals(null)) || (text.contains("Err:")) || (text.contains("Es:"))){
+                for(int i = 0;i<fields.size();i++){
+                    if(!fields.get(i).getText().equals("OCT") && !fields.get(i).getText().equals("BIN") && !fields.get(i).getText().equals("HEX") && !fields.get(i).getText().equals("DEC")){
+                        sel = i;
+                        hist++;
+                    }
+                }
+                if(hist == 1){
+                    switch (sel) {
+                        case 0:
+                            input.setForeground(Color.white);
+                            input.setText("Err: decToDec convertion?");
+                            break;
+                        case 1:
+                            toConvert = fields.get(1).getText();
+                            input.setForeground(Color.white);
+                            input.setText(Integer.parseInt(toConvert,8) + "");
+                            break;
+                        case 2:
+                            toConvert = fields.get(2).getText();
+                            input.setForeground(Color.white);
+                            input.setText(Integer.parseInt(toConvert,16) + "");
+                            break;
+                        case 3:
+                            toConvert = fields.get(3).getText();
+                            input.setForeground(Color.white);
+                            input.setText(Integer.parseInt(toConvert,16) + "");
+                        default:
+                            break;
+                    }
+                }
+                else if(hist > 1){
+                    input.setForeground(Color.white);
+                    input.setText("Err: moreInputsToConvert");
+                }
+            }
+            else{
+                Expression e = new ExpressionBuilder(text).build();
+                double result = e.evaluate();
+                for(int i = 0;i<fields.size();i++){
+                    fields.get(i).setForeground(Color.white);
+                }
+                fields.get(0).setText(result + "");
+                Integer floored = (int)Math.round(result);
+                fields.get(1).setText(Integer.toOctalString(floored));
+                fields.get(2).setText(Integer.toHexString(floored));
+                fields.get(3).setText(Integer.toBinaryString(floored));
+            }
         } catch (Exception e) {
-            input.setText("Err");
+            input.setForeground(Color.white);
+            input.setText("Err: invalidExpression");
+            System.out.println(e.getMessage());
         }
-
-        
+    }
+    public void unDoMath(CalcTextFields input, CalcTextFields dec, CalcTextFields hex, CalcTextFields oct, CalcTextFields bin){
+        ArrayList<CalcTextFields> fields = new ArrayList<>();
+        fields.add(dec);
+        fields.add(oct);
+        fields.add(hex);
+        fields.add(bin);
+        input.clearAll();
+        for(int i = 0;i<fields.size();i++){
+            fields.get(i).clearAll();
+        }
     }
 }
