@@ -6,6 +6,7 @@ import share.StdThings;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.GlobalMemory;
+import oshi.hardware.HWDiskStore;
 import oshi.hardware.NetworkIF;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -20,6 +21,9 @@ public class HwMonitor extends JPanel {
     private Gauge Pswap = new Gauge("swap");
     private Gauge Pdisk = new Gauge("disk");
     private Gauge Pnet = new Gauge("net");
+    private long lastDiskBytes = 0;
+    private long lastNetBytes = 0;
+    private long lastTimestamp = 0;
     public HwMonitor(){
         this.setPreferredSize(new Dimension(280,86));
         this.setBackground(StdThings.getColor1());
@@ -27,8 +31,8 @@ public class HwMonitor extends JPanel {
         this.setLayout(new GridLayout(0,5));
         this.add(Pcpu);
         this.add(Pram);
-        this.add(Pdisk);
         this.add(Pswap);
+        this.add(Pdisk);
         this.add(Pnet);
         start();
     }
@@ -37,6 +41,7 @@ public class HwMonitor extends JPanel {
         scheduler.scheduleAtFixedRate(this::displayStats, 0, 1, TimeUnit.SECONDS);
     }
     private void displayStats() {
+        long currentTimestamp = System.currentTimeMillis();
         // --- CPU ---
         double cpu = processor.getSystemCpuLoadBetweenTicks(prevTicks) * 100;
         prevTicks = processor.getSystemCpuLoadTicks();
@@ -52,20 +57,35 @@ public class HwMonitor extends JPanel {
         Pram.setPercentage(actuallyRam);
         Pswap.setPercentage(actuallySwap);
 
-        // --- DISCO ---
-        var fs = si.getOperatingSystem().getFileSystem().getFileStores().get(0);
-        double disk = ((double)(fs.getTotalSpace() - fs.getUsableSpace()) / fs.getTotalSpace()) * 100;
-        int actuallyDisk = (int)(Math.round(disk));
-        Pdisk.setPercentage(actuallyDisk);
-
-        // --- RETE (Esempio sommario) ---
-        List<NetworkIF> networkIFs = si.getHardware().getNetworkIFs();
-        long inviati = networkIFs.stream().mapToLong(NetworkIF::getBytesSent).sum();
-        long ricevuti = networkIFs.stream().mapToLong(NetworkIF::getBytesRecv).sum();
-        
-        // Nota: per la rete conviene calcolare la differenza tra due secondi per avere i KB/s
-        
+        // --- DISk ---
+        List<HWDiskStore> disks = si.getHardware().getDiskStores();
+        long currentDiskBytes = 0;
+        for (HWDiskStore d : disks) {
+            d.updateAttributes();
+            currentDiskBytes += (d.getReadBytes() + d.getWriteBytes());
+        }
+        // ---NET---
+        List<NetworkIF> nets = si.getHardware().getNetworkIFs();
+        long currentNetBytes = 0;
+        for (NetworkIF n : nets) {
+            n.updateAttributes();
+            currentNetBytes += (n.getBytesRecv() + n.getBytesSent());
+        }
+        if (lastTimestamp != 0) {
+            double elapsedSeconds = (currentTimestamp - lastTimestamp) / 1000.0;
+            double diffDisk = (currentDiskBytes - lastDiskBytes) / (1024.0 * 1024.0);
+            double mbps = diffDisk / elapsedSeconds; //needed
+            int actuallyDisk = (int)(Math.round(mbps));
+            int diskInt = (int) Math.min(100, Math.max(0, (mbps / 4.0) * 100)); //needed
+            Pdisk.setPercentage(actuallyDisk, diskInt, "mb/s");
+            double diffNet = (currentNetBytes - lastNetBytes) / 1024.0;
+            double kbps = diffNet / elapsedSeconds; //needed
+            int actuallyNet = (int)(Math.round(kbps));
+            int netInt = (int) Math.min(100, Math.max(0, (kbps / 4.0) * 100)); //needed
+            Pnet.setPercentage(actuallyNet, netInt, "kb/s");
+        }
+        lastDiskBytes = currentDiskBytes;
+        lastNetBytes = currentNetBytes;
+        lastTimestamp = currentTimestamp;
     }
-
-
 }
