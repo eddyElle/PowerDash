@@ -1,4 +1,4 @@
-package src.clipboard;
+package leftpanel.clipboard;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.*;

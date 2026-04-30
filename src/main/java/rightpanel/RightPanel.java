@@ -1,9 +1,9 @@
-package src.base;
+package rightpanel;
 import javax.swing.*;
 
-import src.calc.Calc;
-import src.hwmonitor.HwMonitor;
-import src.share.StdThings;
+import rightpanel.calc.Calc;
+import rightpanel.hwmonitor.HwMonitor;
+import share.StdThings;
 
 import java.awt.*;
 public class RightPanel extends JPanel {

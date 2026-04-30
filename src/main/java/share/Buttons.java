@@ -1,4 +1,4 @@
-package src.share;
+package share;
 import javax.swing.*;
 public class Buttons extends JButton {
     public Buttons(String name){

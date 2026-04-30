@@ -1,9 +1,9 @@
-package src.base;
+package leftpanel;
 import javax.swing.*;
 
-import src.clipboard.ClipboardPanel;
-import src.notes.NotesPanel;
-import src.share.StdThings;
+import leftpanel.clipboard.ClipboardPanel;
+import leftpanel.notes.NotesPanel;
+import share.StdThings;
 
 import java.awt.*;
 public class LeftPanel extends JPanel {

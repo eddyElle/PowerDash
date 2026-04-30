@@ -1,8 +1,8 @@
-package src.notes;
+package leftpanel.notes;
 import javax.swing.*;
 
-import src.share.Buttons;
-import src.share.StdThings;
+import share.Buttons;
+import share.StdThings;
 
 import java.awt.*;
 import java.io.BufferedReader;

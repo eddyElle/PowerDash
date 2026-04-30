@@ -1,8 +1,8 @@
-package src.hwmonitor;
+package rightpanel.hwmonitor;
 import java.awt.*;
 import javax.swing.*;
 
-import src.share.StdThings;
+import share.StdThings;
 public class Gauge extends JPanel {
     private JPanel[] tiks = new JPanel[10];
     private JPanel tiksContainer = new JPanel();

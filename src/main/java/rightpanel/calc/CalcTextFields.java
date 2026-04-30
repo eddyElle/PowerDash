@@ -1,7 +1,7 @@
-package src.calc;
+package rightpanel.calc;
 import javax.swing.*;
 
-import src.share.StdThings;
+import share.StdThings;
 
 import java.awt.*;
 import java.awt.event.FocusListener;

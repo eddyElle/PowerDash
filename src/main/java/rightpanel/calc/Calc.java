@@ -1,11 +1,12 @@
-package src.calc;
+package rightpanel.calc;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
-import src.share.Buttons;
-import src.share.StdThings;
+import share.Buttons;
+import share.StdThings;
+
 import java.util.ArrayList;
 public class Calc extends JPanel { //ricorda di lavorare con il .jar
     private JPanel top = new JPanel();

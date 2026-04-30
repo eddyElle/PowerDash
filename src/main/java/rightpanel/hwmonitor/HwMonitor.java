@@ -1,9 +1,9 @@
-package src.hwmonitor;
+package rightpanel.hwmonitor;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import src.share.StdThings;
+import share.StdThings;
 public class HwMonitor extends JPanel {
     private JPanel cpu = new Gauge("cpu", "0%");
     private JPanel ram = new Gauge("ram","0%");
