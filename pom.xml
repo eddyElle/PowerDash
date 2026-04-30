@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Informazioni sul tuo progetto -->
+    <!--project info-->
     <groupId>com.powerdash</groupId>
     <artifactId>powerdash-app</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -16,21 +16,21 @@
     </properties>
 
     <dependencies>
-        <!-- OSHI: Per monitorare CPU, RAM, ecc. -->
+        <!-- OSHI-->
         <dependency>
             <groupId>com.github.oshi</groupId>
             <artifactId>oshi-core</artifactId>
             <version>6.4.0</version>
         </dependency>
 
-        <!-- EXP4J: Per i calcoli matematici -->
+        <!-- EXP4J-->
         <dependency>
             <groupId>net.objecthunter</groupId>
             <artifactId>exp4j</artifactId>
             <version>0.4.8</version>
         </dependency>
 
-        <!-- SLF4J: Per gestire i log di OSHI -->
+        <!-- SLF4J-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
@@ -40,7 +40,6 @@
 
     <build>
         <plugins>
-            <!-- Plugin per creare il file JAR finale con tutte le librerie dentro -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -48,7 +47,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.powerdash.src.main.java.PowerMain</mainClass> <!-- CAMBIA QUESTO con il nome della tua classe principale -->
+                            <mainClass>com.powerdash.src.main.java.PowerMain</mainClass> <!-- main path hat to be inserted here -->
                         </manifest>
                     </archive>
                     <descriptorRefs>
