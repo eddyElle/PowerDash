@@ -1,16 +1,16 @@
 package leftpanel.clipboard;
 import javax.swing.*;
 
-import share.Buttons;
+import share.StdButtons;
 import share.StdThings;
 
 import java.awt.*;
 import java.awt.datatransfer.*;
 public class ClipboardPanel extends JPanel{
     private JLabel clipBoard = new JLabel("ClipBoard:");
-    private JButton btn1 = new Buttons("nothing to show");
-    private JButton btn2 = new Buttons("nothing to show");
-    private JButton btn3 = new Buttons("nothing to show");
+    private JButton btn1 = new StdButtons("nothing to show");
+    private JButton btn2 = new StdButtons("nothing to show");
+    private JButton btn3 = new StdButtons("nothing to show");
     private ClipBoardManager clippy = new ClipBoardManager(btn1,btn2,btn3);
     public ClipboardPanel(){
         this.setPreferredSize(new Dimension(205,148));

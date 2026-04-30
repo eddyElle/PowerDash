@@ -4,22 +4,29 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
-import share.Buttons;
+import share.StdButtons;
 import share.StdThings;
+import share.StdTextFields;
 
 import java.util.ArrayList;
 public class Calc extends JPanel { //ricorda di lavorare con il .jar
     private JPanel top = new JPanel();
     private JPanel bottom = new JPanel();
     private JLabel calc = new JLabel("Calc:");
-    private CalcTextFields input= new CalcTextFields("Es: 4+4", new Dimension(179,18));
-    private CalcTextFields dec = new CalcTextFields("DEC" , new Dimension(45,18));
-    private CalcTextFields hex = new CalcTextFields("HEX", new Dimension(65,18));
-    private CalcTextFields oct = new CalcTextFields("OCT", new Dimension(45,18));
-    private CalcTextFields bin = new CalcTextFields("BIN", new Dimension(85,18));
-    private JButton calcBtn = new Buttons("=");
-    private JButton clsBtn = new Buttons("C");
+    private StdTextFields input= new StdTextFields("Es: 4+4", new Dimension(179,18));
+    private StdTextFields dec = new StdTextFields("DEC" , new Dimension(45,18));
+    private StdTextFields hex = new StdTextFields("HEX", new Dimension(65,18));
+    private StdTextFields oct = new StdTextFields("OCT", new Dimension(45,18));
+    private StdTextFields bin = new StdTextFields("BIN", new Dimension(85,18));
+    private JButton calcBtn = new StdButtons("=");
+    private JButton clsBtn = new StdButtons("C");
+    private ArrayList<StdTextFields> fields = new ArrayList<>();
     public Calc(){
+        fields.add(input);
+        fields.add(dec);
+        fields.add(oct);
+        fields.add(hex);
+        fields.add(bin);
         this.setPreferredSize(StdThings.getStdLeftDimension());
         this.setBackground(StdThings.getColor1());
         this.setLayout(new BorderLayout());
@@ -28,17 +35,21 @@ public class Calc extends JPanel { //ricorda di lavorare con il .jar
         top.setLayout(new FlowLayout());
         top.setBackground(StdThings.getColor1());
         top.add(calc);
-        top.add(input);
+        top.add(fields.get(0));
         top.add(calcBtn);
         top.add(clsBtn);
         bottom.setLayout(new FlowLayout());
         bottom.setBackground(StdThings.getColor1());
-        bottom.add(dec);
-        bottom.add(oct);
-        bottom.add(hex);
-        bottom.add(bin);
+        for(int i=1;i<fields.size();i++){
+            bottom.add(fields.get(i));
+        }
         this.add(top,BorderLayout.NORTH);
         this.add(bottom, BorderLayout.SOUTH);
+        for(int i=0;i<fields.size();i++){
+            fields.get(i).addActionListener(e ->{
+                doMath(input, dec, hex, oct, bin);
+            });
+        }
         calcBtn.addActionListener(e -> {
             doMath(input,dec,hex,oct,bin);
         });  
@@ -46,8 +57,8 @@ public class Calc extends JPanel { //ricorda di lavorare con il .jar
             unDoMath(input,dec,hex,oct,bin);
         });  
     }
-    public void doMath(CalcTextFields input, CalcTextFields dec, CalcTextFields hex, CalcTextFields oct, CalcTextFields bin){
-        ArrayList<CalcTextFields> fields = new ArrayList<>();
+    public void doMath(StdTextFields input, StdTextFields dec, StdTextFields hex, StdTextFields oct, StdTextFields bin){
+        ArrayList<StdTextFields> fields = new ArrayList<>();
         int hist = 0; //history
         int sel = 0; //selector
         String toConvert = "";
@@ -111,8 +122,8 @@ public class Calc extends JPanel { //ricorda di lavorare con il .jar
             System.out.println(e.getMessage());
         }
     }
-    public void unDoMath(CalcTextFields input, CalcTextFields dec, CalcTextFields hex, CalcTextFields oct, CalcTextFields bin){
-        ArrayList<CalcTextFields> fields = new ArrayList<>();
+    public void unDoMath(StdTextFields input, StdTextFields dec, StdTextFields hex, StdTextFields oct, StdTextFields bin){
+        ArrayList<StdTextFields> fields = new ArrayList<>();
         fields.add(dec);
         fields.add(oct);
         fields.add(hex);

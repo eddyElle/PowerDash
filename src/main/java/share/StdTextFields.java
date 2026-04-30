@@ -1,14 +1,12 @@
-package rightpanel.calc;
+package share;
 import javax.swing.*;
-
-import share.StdThings;
 
 import java.awt.*;
 import java.awt.event.FocusListener;
 import java.awt.event.FocusEvent;
-public class CalcTextFields extends JTextField {
+public class StdTextFields extends JTextField {
     private String defaultText;
-    CalcTextFields(String defaultText, Dimension dimension){
+    public StdTextFields(String defaultText, Dimension dimension){
         this.defaultText = defaultText;
         this.setPreferredSize(dimension);
         this.setBackground(StdThings.getColor1());
@@ -18,16 +16,16 @@ public class CalcTextFields extends JTextField {
         this.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-            if (CalcTextFields.this.getText().equals(defaultText) || CalcTextFields.this.getText().contains("Err:")) {
-                CalcTextFields.this.setText("");
-                CalcTextFields.this.setForeground(StdThings.getTextColor1());
+            if (StdTextFields.this.getText().equals(defaultText) || StdTextFields.this.getText().contains("Err:")) {
+                StdTextFields.this.setText("");
+                StdTextFields.this.setForeground(StdThings.getTextColor1());
             }
         }
         @Override
         public void focusLost(FocusEvent e) {
-            if (CalcTextFields.this.getText().isEmpty()) {
-                CalcTextFields.this.setForeground(Color.gray);
-                CalcTextFields.this.setText(defaultText);
+            if (StdTextFields.this.getText().isEmpty()) {
+                StdTextFields.this.setForeground(Color.gray);
+                StdTextFields.this.setText(defaultText);
             }
         }
         });

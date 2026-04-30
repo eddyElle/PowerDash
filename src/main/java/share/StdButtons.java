@@ -1,7 +1,7 @@
 package share;
 import javax.swing.*;
-public class Buttons extends JButton {
-    public Buttons(String name){
+public class StdButtons extends JButton {
+    public StdButtons(String name){
         this.setText(name);
         this.setMargin(StdThings.getInset1());
         this.setBackground(StdThings.getColor1());

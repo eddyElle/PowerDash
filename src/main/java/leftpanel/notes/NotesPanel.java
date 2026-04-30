@@ -1,7 +1,7 @@
 package leftpanel.notes;
 import javax.swing.*;
 
-import share.Buttons;
+import share.StdButtons;
 import share.StdThings;
 
 import java.awt.*;
@@ -14,8 +14,8 @@ public class NotesPanel extends JPanel{
     private JTextArea textArea = new JTextArea();
     private JLabel notes = new JLabel("Notes:");
     private JPanel top = new JPanel();
-    private JButton save = new Buttons("save");
-    private JButton load = new Buttons("load");
+    private JButton save = new StdButtons("save");
+    private JButton load = new StdButtons("load");
     public NotesPanel(){
         this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(205,300));

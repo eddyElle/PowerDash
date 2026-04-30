@@ -27,13 +27,28 @@ public class ClipBoardManager extends Thread {
                         SwingUtilities.invokeLater(() -> {
                             switch (currentIndex) {
                                 case 0:
-                                    btn1.setText(copyed);
+                                    if(copyed.equals(btn3.getText())){
+                                        currentIndex--;
+                                    }
+                                    else{
+                                        btn1.setText(copyed);
+                                    }
                                     break;
                                 case 1:
-                                    btn2.setText(copyed);
+                                    if(copyed.equals(btn1.getText())){
+                                        currentIndex--;
+                                    }
+                                    else{
+                                        btn2.setText(copyed);
+                                    }
                                     break;
                                 case 2:
-                                    btn3.setText(copyed);
+                                    if(copyed.equals(btn2.getText())){
+                                        currentIndex--;
+                                    }
+                                    else{
+                                        btn3.setText(copyed);
+                                    }
                                     break;
                                 default:
                                     throw new IllegalArgumentException("something went wrong");
