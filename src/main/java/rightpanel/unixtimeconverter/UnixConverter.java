@@ -1,0 +1,93 @@
+package rightpanel.unixtimeconverter;
+import java.awt.*;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import share.StdButtons;
+import share.StdLabels;
+import share.StdTextFields;
+import share.StdThings;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.TemporalAccessor;
+public class UnixConverter extends JPanel {
+    JPanel top = new JPanel();
+    JPanel bottom = new JPanel();
+    JLabel unixTime = new StdLabels("UnixTime: ");
+    JLabel humansTime = new StdLabels("UserTime: ");
+    StdTextFields unixText = new StdTextFields("insert time", new Dimension(169,18));
+    StdTextFields humansText = new StdTextFields("press Enter to convert", new Dimension(187,18));
+    private JButton clsBtn = new StdButtons("C");
+    public UnixConverter(){
+        this.setPreferredSize(StdThings.getStdLeftDimension());
+        this.setBackground(StdThings.getColor1());
+        this.setLayout(new BorderLayout());
+        this.setBorder(new EmptyBorder(3,3,3,3));
+        top.setBackground(StdThings.getColor1());
+        top.setLayout(new FlowLayout());
+        bottom.setBackground(StdThings.getColor1());
+        bottom.setLayout(new FlowLayout());
+        this.add(top,BorderLayout.NORTH);
+        this.add(bottom,BorderLayout.SOUTH);
+        top.add(unixTime);
+        top.add(unixText);
+        top.add(clsBtn);
+        bottom.add(humansTime);
+        bottom.add(humansText);
+        unixText.addActionListener(e -> {
+            unixToHumans(unixText.getText());
+        });
+        humansText.addActionListener(e -> {
+            humansToUnix(humansText.getText());
+        });
+        clsBtn.addActionListener(e -> {
+            unixText.clearAll();
+            humansText.clearAll();
+        });
+    }
+    public void humansToUnix(String toConvert){
+        try {
+            String normalizedInput = toConvert.trim().replace(" ", "T");
+            DateTimeFormatter flexFormatter = new DateTimeFormatterBuilder()
+            .append(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+            .optionalStart().appendOffsetId().optionalEnd() // Supporta Z o +HH:mm
+            .toFormatter();
+            TemporalAccessor accessor = flexFormatter.parseBest(normalizedInput,OffsetDateTime::from, LocalDateTime::from);
+            long seconds;
+            if (accessor instanceof OffsetDateTime) {
+                seconds = ((OffsetDateTime) accessor).toEpochSecond();
+            } else {
+                // Se manca l'offset, un sistemista si aspetta che venga usato il fuso locale
+                seconds = ((LocalDateTime) accessor).atZone(ZoneId.systemDefault()).toEpochSecond();
+            }
+            unixText.setForeground(StdThings.getTextColor1());
+            unixText.setText(String.valueOf(seconds));
+
+        } catch (Exception e) {
+            unixText.setForeground(StdThings.getTextColor1());
+            unixText.setText("Err: use ISO-8601[Z/±Off.]");
+        }
+    }
+    public void unixToHumans(String toConvert){
+        try {
+            long unixSeconds = Long.parseLong(toConvert);
+            Instant instant = Instant.ofEpochSecond(unixSeconds);
+            if (toConvert.length() == 13) {
+                instant = Instant.ofEpochMilli(unixSeconds);
+            }
+            ZonedDateTime dateTime = instant.atZone(ZoneId.systemDefault());
+            String formatted = dateTime.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+            humansText.setForeground(StdThings.getTextColor1());
+            humansText.setText(formatted);
+
+        } catch (Exception e) {
+            humansText.setForeground(StdThings.getTextColor1());
+            humansText.setText("Err: valid value required");
+        }
+        
+    }
+}
