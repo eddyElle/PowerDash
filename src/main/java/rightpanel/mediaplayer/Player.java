@@ -28,7 +28,7 @@ public class Player extends JPanel {
     private double curL = 0, curR = 0, curT = 0;
     private int targetL = 0, targetR = 0, targetT = 0;
 
-    // Identificazione OS
+    // Os identification
     private static final String OS = System.getProperty("os.name").toLowerCase();
 
     public Player() {
@@ -53,7 +53,6 @@ public class Player extends JPanel {
         controls.add(next);
         this.add(controls, BorderLayout.EAST);
 
-        // Listener dei pulsanti
         play.addActionListener(e -> {
             sendMediaCommand("playpause");
             togglePlayback();
@@ -63,9 +62,6 @@ public class Player extends JPanel {
         next.addActionListener(e -> sendMediaCommand("next"));
     }
 
-    /**
-     * Invia il comando multimediale al Sistema Operativo
-     */
     private void sendMediaCommand(String action) {
         try {
             if (OS.contains("win")) {
@@ -107,12 +103,12 @@ public class Player extends JPanel {
 
     private void startAnimation() {
         isPlaying = true;
-        play.setText("\u23F8"); // Icona pausa
+        play.setText("\u23F8");
         executor = Executors.newSingleThreadScheduledExecutor(r -> {
         Thread t = new Thread(r);
-        // Diciamo al Sistema Operativo che questo thread è più importante degli altri
+        // this thread is more important then others
         t.setPriority(Thread.MAX_PRIORITY); 
-        // Fondamentale: permette al thread di chiudersi se chiudi l'app
+        // thread can be terminated if the program gets termianted
         t.setDaemon(true); 
         return t;
     });
@@ -146,7 +142,7 @@ public class Player extends JPanel {
 
     public void stopAnimation() {
         isPlaying = false;
-        play.setText("\u25B6"); // Icona play
+        play.setText("\u25B6"); 
         if (executor != null) {
             executor.shutdownNow();
             executor = null;

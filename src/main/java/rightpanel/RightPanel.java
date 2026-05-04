@@ -4,15 +4,19 @@ import javax.swing.*;
 import rightpanel.calc.Calc;
 import rightpanel.hwmonitor.HwMonitor;
 import rightpanel.mediaplayer.Player;
+import rightpanel.quicksettings.QuickSett;
 import rightpanel.unixtimeconverter.UnixConverter;
+import rightpanel.workmgr.WorkMgr;
 import share.StdThings;
 
 import java.awt.*;
 public class RightPanel extends JPanel {
-    JPanel calc = new Calc();
-    JPanel hwMonitor = new HwMonitor();
-    JPanel mediaPlayer = new Player();
-    JPanel unixTimeConverter = new UnixConverter();
+    private JPanel calc = new Calc();
+    private JPanel hwMonitor = new HwMonitor();
+    private JPanel mediaPlayer = new Player();
+    private JPanel unixTimeConverter = new UnixConverter();
+    private JPanel workMgr = new WorkMgr();
+    private JPanel quickSett = new QuickSett();
     public RightPanel(){
         this.setBackground(StdThings.getGray1());
         this.setPreferredSize(new Dimension(285,500));
@@ -21,5 +25,7 @@ public class RightPanel extends JPanel {
         this.add(hwMonitor);
         this.add(mediaPlayer);
         this.add(unixTimeConverter);
+        this.add(workMgr);
+        this.add(quickSett);
     }
 }

@@ -2,22 +2,22 @@ package leftpanel.clipboard;
 import javax.swing.*;
 
 import share.StdButtons;
+import share.StdLabels;
 import share.StdThings;
 
 import java.awt.*;
 import java.awt.datatransfer.*;
 public class ClipboardPanel extends JPanel{
-    private JLabel clipBoard = new JLabel("ClipBoard:");
-    private JButton btn1 = new StdButtons("nothing to show");
-    private JButton btn2 = new StdButtons("nothing to show");
-    private JButton btn3 = new StdButtons("nothing to show");
+    private JLabel clipBoard = new StdLabels("ClipBoard:");
+    private JButton btn1 = new StdButtons("Nothing to show");
+    private JButton btn2 = new StdButtons("Nothing to show");
+    private JButton btn3 = new StdButtons("Nothing to show");
     private ClipBoardManager clippy = new ClipBoardManager(btn1,btn2,btn3);
     public ClipboardPanel(){
         this.setPreferredSize(new Dimension(205,148));
         this.setBackground(StdThings.getColor1());
         this.setLayout(new GridLayout(4,0));
         this.setBorder(StdThings.getStdMargin());
-        clipBoard.setForeground(StdThings.getTextColor1());
         this.add(clipBoard);
         this.add(btn1);
         this.add(btn2);

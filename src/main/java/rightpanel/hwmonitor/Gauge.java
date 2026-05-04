@@ -1,12 +1,14 @@
 package rightpanel.hwmonitor;
 import java.awt.*;
 import javax.swing.*;
+
+import share.StdLabels;
 import share.StdThings;
 public class Gauge extends JPanel {
     private JPanel[] tiks = new JPanel[10];
     private JPanel tiksContainer = new JPanel();
-    private JLabel defaultLabel = new JLabel();
-    private JLabel defaultPercentage = new JLabel("0");
+    private JLabel defaultLabel = new StdLabels("");
+    private JLabel defaultPercentage = new StdLabels("0");
     private JPanel labelContainer = new JPanel();
     public Gauge(String name){
         this.setLayout(new BorderLayout());
@@ -27,12 +29,10 @@ public class Gauge extends JPanel {
         labelContainer.add(defaultLabel);
         labelContainer.add(defaultPercentage);
         defaultLabel.setText(name);
-        defaultLabel.setForeground(StdThings.getTextColor1());
         defaultLabel.setHorizontalAlignment(JLabel.CENTER);
         defaultLabel.setVerticalAlignment(JLabel.CENTER);
         defaultPercentage.setHorizontalAlignment(JLabel.CENTER);
         defaultPercentage.setVerticalAlignment(JLabel.CENTER);
-        defaultPercentage.setForeground(StdThings.getTextColor1());
     }
     public int setPercentage(int percentage){
         defaultPercentage.setText(percentage + "%");

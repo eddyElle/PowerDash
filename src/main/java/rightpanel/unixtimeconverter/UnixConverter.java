@@ -15,12 +15,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.TemporalAccessor;
 public class UnixConverter extends JPanel {
-    JPanel top = new JPanel();
-    JPanel bottom = new JPanel();
-    JLabel unixTime = new StdLabels("UnixTime: ");
-    JLabel humansTime = new StdLabels("UserTime: ");
-    StdTextFields unixText = new StdTextFields("insert time", new Dimension(169,18));
-    StdTextFields humansText = new StdTextFields("press Enter to convert", new Dimension(187,18));
+    private JPanel top = new JPanel();
+    private JPanel bottom = new JPanel();
+    private JLabel unixTime = new StdLabels("UnixTime: ");
+    private JLabel humansTime = new StdLabels("UserTime: ");
+    private StdTextFields unixText = new StdTextFields("Insert time", new Dimension(169,18));
+    private StdTextFields humansText = new StdTextFields("Press Enter to convert", new Dimension(187,18));
     private JButton clsBtn = new StdButtons("C");
     public UnixConverter(){
         this.setPreferredSize(StdThings.getStdLeftDimension());
@@ -64,11 +64,9 @@ public class UnixConverter extends JPanel {
                 // Se manca l'offset, un sistemista si aspetta che venga usato il fuso locale
                 seconds = ((LocalDateTime) accessor).atZone(ZoneId.systemDefault()).toEpochSecond();
             }
-            unixText.setForeground(StdThings.getTextColor1());
             unixText.setText(String.valueOf(seconds));
 
         } catch (Exception e) {
-            unixText.setForeground(StdThings.getTextColor1());
             unixText.setText("Err: use ISO-8601[Z/±Off.]");
         }
     }
@@ -81,11 +79,9 @@ public class UnixConverter extends JPanel {
             }
             ZonedDateTime dateTime = instant.atZone(ZoneId.systemDefault());
             String formatted = dateTime.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
-            humansText.setForeground(StdThings.getTextColor1());
             humansText.setText(formatted);
 
         } catch (Exception e) {
-            humansText.setForeground(StdThings.getTextColor1());
             humansText.setText("Err: valid value required");
         }
         

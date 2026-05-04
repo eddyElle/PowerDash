@@ -8,11 +8,7 @@ public class StdThings {
     private static Color gray1 = new Color(143,143,143);
     private static Insets Inset1 = new Insets(0,0,0,0);
     private static EmptyBorder stdMargin = new EmptyBorder(3,8,8,8);
-    private static Dimension stdLeftDimension = new Dimension(280,70);
-    public static void becomeWhite(){
-        StdThings.textColor1 = Color.black;
-        System.out.println("done");
-    }
+    private static Dimension stdLeftDimension = new Dimension(280,60);
     public static Color getColor1(){
         return color1;
     }

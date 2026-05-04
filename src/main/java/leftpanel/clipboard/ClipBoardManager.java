@@ -27,7 +27,7 @@ public class ClipBoardManager extends Thread {
                         SwingUtilities.invokeLater(() -> {
                             switch (currentIndex) {
                                 case 0:
-                                    if(copyed.equals(btn3.getText())){
+                                    if(copyed.equals(btn3.getText()) || copyed.equals(btn2.getText()) || copyed.equals("")){
                                         currentIndex--;
                                     }
                                     else{
@@ -35,7 +35,7 @@ public class ClipBoardManager extends Thread {
                                     }
                                     break;
                                 case 1:
-                                    if(copyed.equals(btn1.getText())){
+                                    if(copyed.equals(btn1.getText()) || copyed.equals("") || copyed.equals(btn3.getText())){
                                         currentIndex--;
                                     }
                                     else{
@@ -43,7 +43,7 @@ public class ClipBoardManager extends Thread {
                                     }
                                     break;
                                 case 2:
-                                    if(copyed.equals(btn2.getText())){
+                                    if(copyed.equals(btn2.getText()) || copyed.equals("") || copyed.equals(btn1.getText())){
                                         currentIndex--;
                                     }
                                     else{

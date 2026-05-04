@@ -15,6 +15,7 @@ public class PowerMain{
         frame.add(leftColumn,BorderLayout.WEST);
         frame.add(rightColumn,BorderLayout.EAST);
         frame.setResizable(false);
+        frame.setAlwaysOnTop(true);
         frame.setVisible(true);
     }
 }
