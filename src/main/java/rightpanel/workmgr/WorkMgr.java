@@ -15,9 +15,10 @@ public class WorkMgr extends JPanel {
     private StdTextFields copilot = new StdTextFields("Press start", new Dimension(130,21));
     private JLabel brk = new StdLabels("Break(min):");
     private StdButtons decreaseBrk = new StdButtons("-");
-    private JLabel brkMins = new StdLabels("20");
     private StdButtons increaseBrk = new StdButtons("+");
     private JButton finishDay = new StdButtons("End day");
+    private JLabel brkMins = new StdLabels("");
+    
     public WorkMgr(){
         this.setPreferredSize(StdThings.getStdLeftDimension());
         this.setBackground(StdThings.getColor1());
@@ -38,5 +39,6 @@ public class WorkMgr extends JPanel {
         bottom.add(increaseBrk);
         bottom.add(playBtn);
         bottom.add(finishDay);
+
     }
 }
