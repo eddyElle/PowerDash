@@ -1,0 +1,6 @@
+#User Settings - Automatically Generated
+#Tue May 05 19:17:02 CEST 2026
+Breaks=false
+Breaks_min=20
+Caffeine=false
+Sounds=false
