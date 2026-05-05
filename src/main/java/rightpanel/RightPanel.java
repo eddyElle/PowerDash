@@ -1,9 +1,8 @@
 package rightpanel;
 import javax.swing.*;
-
+import rightpanel.asciiconverter.AsciiConverter;
 import rightpanel.calc.Calc;
 import rightpanel.hwmonitor.HwMonitor;
-import rightpanel.mediaplayer.Player;
 import rightpanel.quicksettings.QuickSett;
 import rightpanel.unixtimeconverter.UnixConverter;
 import rightpanel.workmgr.WorkMgr;
@@ -13,7 +12,7 @@ import java.awt.*;
 public class RightPanel extends JPanel {
     private JPanel calc = new Calc();
     private JPanel hwMonitor = new HwMonitor();
-    private JPanel mediaPlayer = new Player();
+    private JPanel asciiConverter = new AsciiConverter();
     private JPanel unixTimeConverter = new UnixConverter();
     private JPanel workMgr = new WorkMgr();
     private JPanel quickSett = new QuickSett();
@@ -23,7 +22,7 @@ public class RightPanel extends JPanel {
         this.setLayout(new FlowLayout(FlowLayout.RIGHT));
         this.add(calc);
         this.add(hwMonitor);
-        this.add(mediaPlayer);
+        this.add(asciiConverter);
         this.add(unixTimeConverter);
         this.add(workMgr);
         this.add(quickSett);

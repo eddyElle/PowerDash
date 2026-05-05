@@ -11,7 +11,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class Player extends JPanel {
+public class Player extends JPanel { //NEXT RELEASE THING
     private JPanel vMeter = new JPanel();
     private JPanel controls = new JPanel();
     private Gauge chl = new Gauge("CHL");

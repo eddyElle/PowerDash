@@ -6,7 +6,6 @@ import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-
 import java.awt.datatransfer.*;
 import share.StdThings;
 public class AboutFrame extends JFrame {

@@ -28,7 +28,6 @@ public class ConfigManager {
 
     private void setDefaultValues() {
         // Define your default settings here
-        props.setProperty("Caffeine", "false");
         props.setProperty("Sounds", "true");
         props.setProperty("Breaks", "true");
         props.setProperty("Breaks_min", "20");
