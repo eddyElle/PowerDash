@@ -27,7 +27,6 @@ public class ConfigManager {
     }
 
     private void setDefaultValues() {
-        // Define your default settings here
         props.setProperty("Breaks", "true");
         props.setProperty("Breaks_min", "20");
     }
@@ -48,7 +47,6 @@ public class ConfigManager {
         }
     }
 
-    // --- GETTERS ---
 
     public boolean getBoolean(String key) {
         return Boolean.parseBoolean(props.getProperty(key, "false"));
@@ -62,7 +60,6 @@ public class ConfigManager {
         }
     }
 
-    // --- SETTER ---
     public void setValue(String key, Object value) {
         props.setProperty(key, String.valueOf(value));
         saveToDisk();

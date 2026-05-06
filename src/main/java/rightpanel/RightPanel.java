@@ -7,7 +7,6 @@ import rightpanel.quicksettings.QuickSett;
 import rightpanel.unixtimeconverter.UnixConverter;
 import rightpanel.workmgr.WorkMgr;
 import share.StdThings;
-
 import java.awt.*;
 public class RightPanel extends JPanel {
     private JPanel calc = new Calc();

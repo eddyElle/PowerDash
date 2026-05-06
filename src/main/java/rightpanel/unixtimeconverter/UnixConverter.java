@@ -54,14 +54,14 @@ public class UnixConverter extends JPanel {
             String normalizedInput = toConvert.trim().replace(" ", "T");
             DateTimeFormatter flexFormatter = new DateTimeFormatterBuilder()
             .append(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
-            .optionalStart().appendOffsetId().optionalEnd() // Supporta Z o +HH:mm
+            .optionalStart().appendOffsetId().optionalEnd() // Supports Z o +HH:mm
             .toFormatter();
             TemporalAccessor accessor = flexFormatter.parseBest(normalizedInput,OffsetDateTime::from, LocalDateTime::from);
             long seconds;
             if (accessor instanceof OffsetDateTime) {
                 seconds = ((OffsetDateTime) accessor).toEpochSecond();
             } else {
-                // Se manca l'offset, un sistemista si aspetta che venga usato il fuso locale
+                // no offset = your local time Dispalyed
                 seconds = ((LocalDateTime) accessor).atZone(ZoneId.systemDefault()).toEpochSecond();
             }
             unixText.setText(String.valueOf(seconds));

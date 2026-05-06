@@ -54,6 +54,7 @@ public class AsciiConverter extends JPanel{
         container.setLayout(new GridLayout(4,7));
         container.setBackground(StdThings.getColor1());
         active.setBackground(StdThings.getColor1());
+        copyBtn.setPreferredSize(new Dimension(74,20));
         active.add(ascii);
         active.add(asciiText);
         active.add(copyBtn);

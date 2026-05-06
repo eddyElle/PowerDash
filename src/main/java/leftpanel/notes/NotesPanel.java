@@ -1,10 +1,9 @@
 package leftpanel.notes;
 import javax.swing.*;
-
+import javax.swing.plaf.basic.BasicScrollBarUI;
 import share.StdButtons;
 import share.StdLabels;
 import share.StdThings;
-
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.File;
@@ -17,7 +16,39 @@ public class NotesPanel extends JPanel{
     private JPanel top = new JPanel();
     private JButton save = new StdButtons("Save");
     private JButton load = new StdButtons("Load");
+    private JScrollPane scroll = new JScrollPane(textArea);
     public NotesPanel(){
+        scroll.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+            @Override
+            protected void configureScrollBarColors() {
+                this.trackColor = StdThings.getColor1();
+            }
+
+            @Override
+            protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
+                g.setColor(StdThings.getGray1());
+                g.fillRect(thumbBounds.x + 2, thumbBounds.y + 2, 
+                           thumbBounds.width - 4, thumbBounds.height - 4);
+            }
+
+            @Override
+            protected JButton createDecreaseButton(int orientation) {
+                return createZeroButton();
+            }
+
+            @Override
+            protected JButton createIncreaseButton(int orientation) {
+                return createZeroButton();
+            }
+
+            private JButton createZeroButton() {
+                JButton jbutton = new JButton();
+                jbutton.setPreferredSize(new Dimension(0, 0));
+                jbutton.setMinimumSize(new Dimension(0, 0));
+                jbutton.setMaximumSize(new Dimension(0, 0));
+                return jbutton;
+            }
+        });
         this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(205,300));
         this.setBackground(StdThings.getColor1());
@@ -40,7 +71,9 @@ public class NotesPanel extends JPanel{
         textArea.setForeground(StdThings.getTextColor1());
         textArea.setCaretColor(StdThings.getTextColor1());
         textArea.setLineWrap(true);
-        this.add(textArea,BorderLayout.CENTER);
+        scroll.setBackground(StdThings.getColor1());
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        this.add(scroll,BorderLayout.CENTER);
     }
     public void saveCont(JTextArea textArea) {
         JFileChooser file = new JFileChooser();

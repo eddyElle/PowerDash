@@ -1,10 +1,8 @@
 package leftpanel.clipboard;
 import javax.swing.*;
-
 import share.StdButtons;
 import share.StdLabels;
 import share.StdThings;
-
 import java.awt.*;
 import java.awt.datatransfer.*;
 public class ClipboardPanel extends JPanel{

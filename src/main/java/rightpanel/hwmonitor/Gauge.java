@@ -1,7 +1,6 @@
 package rightpanel.hwmonitor;
 import java.awt.*;
 import javax.swing.*;
-
 import share.StdLabels;
 import share.StdThings;
 public class Gauge extends JPanel {

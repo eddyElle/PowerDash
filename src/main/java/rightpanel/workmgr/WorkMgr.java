@@ -7,24 +7,23 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.*;
-
+import javax.swing.border.EmptyBorder;
 import rightpanel.quicksettings.QuickSett;
 import share.StdButtons;
 import share.StdLabels;
 import share.StdTextFields;
 import share.StdThings;
-
 public class WorkMgr extends JPanel {
     private JPanel top = new JPanel();
     private JPanel bottom = new JPanel();
-    private JLabel worked = new StdLabels("Worked: ");
+    private JLabel worked = new StdLabels("Worked:");
     private JLabel hoursMins = new StdLabels("0h 0min");
     private StdButtons playBtn = new StdButtons("Start");
-    private StdTextFields copilot = new StdTextFields("Press start", new Dimension(130, 21));
+    private StdTextFields copilot = new StdTextFields("Press start", new Dimension(144, 21));
     private JLabel brk = new StdLabels("Break(min):");
     private StdButtons decreaseBrk = new StdButtons("-");
     private StdButtons increaseBrk = new StdButtons("+");
-    private JButton finishDay = new StdButtons("End day");
+    private JButton finishDay = new StdButtons("End shift");
     private JLabel brkMins = new StdLabels(String.valueOf(QuickSett.config.getInt("Breaks_min")));
     private Timer timer;
     private Timer flashTimer;
@@ -42,16 +41,16 @@ public class WorkMgr extends JPanel {
         this.setPreferredSize(StdThings.getStdLeftDimension());
         this.setBackground(StdThings.getColor1());
         this.setLayout(new BorderLayout());
-        
+        this.setBorder(new EmptyBorder(3, 3, 3, 3));
         top.setBackground(StdThings.getColor1());
         top.setLayout(new FlowLayout());
         bottom.setBackground(StdThings.getColor1());
         bottom.setLayout(new FlowLayout());
-        
+        playBtn.setPreferredSize(new Dimension(66,22));
         this.add(top, BorderLayout.NORTH);
         this.add(bottom, BorderLayout.SOUTH);
         
-        decreaseBrk.setPreferredSize(new Dimension(15, 21));
+        decreaseBrk.setPreferredSize(new Dimension(12, 21));
         
         top.add(worked);
         top.add(hoursMins);
@@ -63,18 +62,19 @@ public class WorkMgr extends JPanel {
         bottom.add(playBtn);
         bottom.add(finishDay);
         copilot.setHorizontalAlignment(JTextField.CENTER);
+        copilot.setEditable(false);
         initLogic();
     }
 
     private void initLogic() {
-        // Timer principale
+        // main timer
         timer = new Timer(1000, e -> {
             totalSeconds++;
             updateTimeLabel();
             checkStatus();
         });
 
-        // Timer per il lampeggio (ogni 500ms cambia colore)
+        // blink timer
         flashTimer = new Timer(500, e -> {
             if (isBlinking) {
                 Color currentBg = copilot.getBackground();
@@ -121,18 +121,16 @@ public class WorkMgr extends JPanel {
             isPaused = true;
         }
     }
-
     private void updateTimeLabel() {
         int hours = totalSeconds / 3600;
         int mins = (totalSeconds % 3600) / 60;
         hoursMins.setText(hours + "h " + mins + "min");
     }
-
     private void checkStatus() {
     int currentMins = totalSeconds / 60;
     int currentSecs = totalSeconds % 60;
 
-    // Aggiorna sempre lo stato Overworking (8h+) indipendentemente dai break
+    // updates Overworking state (8h+)
     updateStatus();
 
     if (QuickSett.config.getBoolean("Breaks")) {
@@ -143,7 +141,7 @@ public class WorkMgr extends JPanel {
             startBlinking("TAKE A BREAK!", Color.YELLOW);
         }
     } else {
-        // Se i break vengono disabilitati mentre stava lampeggiando, resetta la label
+
         if (copilot.getText().equals("TAKE A BREAK!")) {
             stopBlinking();
             copilot.setText("Working...");
@@ -156,7 +154,7 @@ public class WorkMgr extends JPanel {
 
     private void updateStatus() {
         if (!isPaused) {
-            if (totalSeconds >= 28800) { // 8 Ore
+            if (totalSeconds >= 28800) { // 8 Hours
                 startBlinking("OVERWORKING!", Color.RED);
             } else if (!copilot.getText().equals("TAKE A BREAK!")) {
                 stopBlinking();

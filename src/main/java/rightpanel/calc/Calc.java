@@ -8,9 +8,8 @@ import share.StdButtons;
 import share.StdLabels;
 import share.StdThings;
 import share.StdTextFields;
-
 import java.util.ArrayList;
-public class Calc extends JPanel { //ricorda di lavorare con il .jar
+public class Calc extends JPanel { 
     private JPanel top = new JPanel();
     private JPanel bottom = new JPanel();
     private JLabel calc = new StdLabels("Calc:");

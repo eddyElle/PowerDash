@@ -106,9 +106,7 @@ public class Player extends JPanel { //NEXT RELEASE THING
         play.setText("\u23F8");
         executor = Executors.newSingleThreadScheduledExecutor(r -> {
         Thread t = new Thread(r);
-        // this thread is more important then others
         t.setPriority(Thread.MAX_PRIORITY); 
-        // thread can be terminated if the program gets termianted
         t.setDaemon(true); 
         return t;
     });

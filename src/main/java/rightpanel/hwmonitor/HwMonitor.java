@@ -57,31 +57,31 @@ public class HwMonitor extends JPanel {
         Pram.setPercentage(actuallyRam);
         Pswap.setPercentage(actuallySwap);
 
-        // --- DISk ---
+        // --- DISk & NET ---
         List<HWDiskStore> disks = si.getHardware().getDiskStores();
         long currentDiskBytes = 0;
         for (HWDiskStore d : disks) {
             d.updateAttributes();
             currentDiskBytes += (d.getReadBytes() + d.getWriteBytes());
         }
-        // ---NET---
         List<NetworkIF> nets = si.getHardware().getNetworkIFs();
         long currentNetBytes = 0;
         for (NetworkIF n : nets) {
             n.updateAttributes();
             currentNetBytes += (n.getBytesRecv() + n.getBytesSent());
         }
+        //---- DISK & NET GAUGE MANAGEMENT
         if (lastTimestamp != 0) {
             double elapsedSeconds = (currentTimestamp - lastTimestamp) / 1000.0;
             double diffDisk = (currentDiskBytes - lastDiskBytes) / (1024.0 * 1024.0);
             double mbps = diffDisk / elapsedSeconds; //needed
             int actuallyDisk = (int)(Math.round(mbps));
-            int diskInt = (int) Math.min(100, Math.max(0, (mbps / 4.0) * 100)); //needed
+            int diskInt = (int) Math.min(100, Math.max(0, (mbps / 1000.0) * 100)); //needed
             Pdisk.setPercentage(actuallyDisk, diskInt, "mb/s");
             double diffNet = (currentNetBytes - lastNetBytes) / 1024.0;
             double kbps = diffNet / elapsedSeconds; //needed
             int actuallyNet = (int)(Math.round(kbps));
-            int netInt = (int) Math.min(100, Math.max(0, (kbps / 4.0) * 100)); //needed
+            int netInt = (int) Math.min(100, Math.max(0, (kbps / 1000.0) * 100)); //needed
             Pnet.setPercentage(actuallyNet, netInt, "kb/s");
         }
         lastDiskBytes = currentDiskBytes;
