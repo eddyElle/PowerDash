@@ -20,7 +20,7 @@ public class WorkMgr extends JPanel {
     private JLabel hoursMins = new StdLabels("0h 0min");
     private StdButtons playBtn = new StdButtons("Start");
     private StdTextFields copilot = new StdTextFields("Press start", new Dimension(144, 21));
-    private JLabel brk = new StdLabels("Break(min):");
+    private JLabel brk = new StdLabels("F.Brks(min):");
     private StdButtons decreaseBrk = new StdButtons("-");
     private StdButtons increaseBrk = new StdButtons("+");
     private JButton finishDay = new StdButtons("End shift");
@@ -46,7 +46,8 @@ public class WorkMgr extends JPanel {
         top.setLayout(new FlowLayout());
         bottom.setBackground(StdThings.getColor1());
         bottom.setLayout(new FlowLayout());
-        playBtn.setPreferredSize(new Dimension(66,22));
+        playBtn.setPreferredSize(new Dimension(46,22));
+        finishDay.setPreferredSize(new Dimension(76,22));
         this.add(top, BorderLayout.NORTH);
         this.add(bottom, BorderLayout.SOUTH);
         

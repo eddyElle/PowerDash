@@ -9,7 +9,7 @@ import javax.swing.border.LineBorder;
 import java.awt.datatransfer.*;
 import share.StdThings;
 public class AboutFrame extends JFrame {
-    JLabel powerDash = new JLabel("PowerDash");
+    JLabel powerDash = new JLabel("PowerDash"); //nomral labels because they are completly different from the std ones (excluding the font) 
     JLabel description = new JLabel("created by EDL405 for all");
     JLabel description1 = new JLabel("the ones who work in IT");
     JLabel powered = new JLabel("powered by:");
@@ -40,11 +40,11 @@ public class AboutFrame extends JFrame {
         texts.setPreferredSize(new Dimension(200,400));
         texts.setLayout(new FlowLayout());
         texts.setBackground(StdThings.getGray1());
-        powerDash.setFont(new Font(TOOL_TIP_TEXT_KEY, Font.BOLD, 30));
+        powerDash.setFont(new Font("Dialog", Font.BOLD, 30));
         powerDash.setForeground(Color.BLACK);
-        description.setFont(new Font(TOOL_TIP_TEXT_KEY, Font.ITALIC, 12));
-        description1.setFont(new Font(TOOL_TIP_TEXT_KEY, Font.ITALIC, 12));
-        powered.setFont(new Font(TOOL_TIP_TEXT_KEY, Font.BOLD, 14));
+        description.setFont(new Font("Dialog", Font.ITALIC, 12));
+        description1.setFont(new Font("Dialog", Font.ITALIC, 12));
+        powered.setFont(new Font("Dialog", Font.BOLD, 14));
         duke.setPreferredSize(new Dimension(200,200));
         copy.setBackground(StdThings.getGray1());
         copy.setForeground(Color.BLACK);

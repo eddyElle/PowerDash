@@ -8,7 +8,7 @@ import share.StdLabels;
 import share.StdThings;
 import java.awt.*;
 public class QuickSett extends JPanel{
-    private StdButtons about = new StdButtons("About PowerDash");
+    private StdButtons about = new StdButtons("About");
     private StdButtons noBrk = new StdButtons("Breaks:on");
     private JLabel settings = new StdLabels("Settings:");
     public static ConfigManager config = new ConfigManager();
@@ -21,8 +21,8 @@ public class QuickSett extends JPanel{
         this.add(settings);
         this.add(noBrk);
         this.add(about);
-        noBrk.setPreferredSize(new Dimension(70,22));
-        about.setPreferredSize(new Dimension(120,22));
+        noBrk.setPreferredSize(new Dimension(90,22));
+        about.setPreferredSize(new Dimension(60,22));
         noBrk.addActionListener(e -> {
             switchStatus(noBrk, "Breaks");
         });
