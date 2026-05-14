@@ -1,4 +1,0 @@
-#User Settings - Automatically Generated
-#Thu May 14 08:30:42 CEST 2026
-Breaks=false
-Breaks_min=1

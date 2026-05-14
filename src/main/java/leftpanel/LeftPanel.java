@@ -7,7 +7,7 @@ import java.awt.*;
 public class LeftPanel extends JPanel {
     public LeftPanel(){
         this.setBackground(StdThings.getGray1());
-        this.setPreferredSize(new Dimension(215,500));
+        this.setPreferredSize(new Dimension(215,463));
         this.add(new NotesPanel());
         this.add(new ClipboardPanel());
     }

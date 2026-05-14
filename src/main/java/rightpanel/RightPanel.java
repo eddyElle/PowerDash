@@ -17,7 +17,7 @@ public class RightPanel extends JPanel {
     private JPanel quickSett = new QuickSett();
     public RightPanel(){
         this.setBackground(StdThings.getGray1());
-        this.setPreferredSize(new Dimension(285,500));
+        this.setPreferredSize(new Dimension(285,463));
         this.setLayout(new FlowLayout(FlowLayout.RIGHT));
         this.add(calc);
         this.add(hwMonitor);

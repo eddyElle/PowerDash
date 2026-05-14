@@ -28,7 +28,6 @@ public class AboutFrame extends JFrame {
         this.setSize(250,400);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setResizable(false);
-        this.setAlwaysOnTop(true);
         this.setBackground(StdThings.getColor1());
         this.add(background);
         background.setLayout(new FlowLayout());
