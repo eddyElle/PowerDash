@@ -20,7 +20,7 @@ public class WorkMgr extends JPanel {
     private JLabel hoursMins = new StdLabels("0h 0min");
     private StdButtons playBtn = new StdButtons("Start");
     private StdTextFields copilot = new StdTextFields("Press start", new Dimension(144, 21));
-    private JLabel brk = new StdLabels("F.Brks(min):");
+    private JLabel brk = new StdLabels("F.Brks(m):");
     private StdButtons decreaseBrk = new StdButtons("-");
     private StdButtons increaseBrk = new StdButtons("+");
     private JButton finishDay = new StdButtons("End shift");
