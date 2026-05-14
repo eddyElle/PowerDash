@@ -1,7 +1,6 @@
 package aboutframe;
 import java.awt.*;
 import java.net.URL;
-import static javax.swing.JComponent.TOOL_TIP_TEXT_KEY;
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
