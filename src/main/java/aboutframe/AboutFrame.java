@@ -25,7 +25,6 @@ public class AboutFrame extends JFrame {
     LineBorder line = new LineBorder(Color.BLACK, 1);
     public AboutFrame(){
         this.setTitle("About");
-        this.setSize(250,400);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setResizable(false);
         this.setBackground(StdThings.getColor1());

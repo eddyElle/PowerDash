@@ -50,6 +50,7 @@ public class QuickSett extends JPanel{
     }
     private void popAbout(){
         JFrame frame2 = new AboutFrame();
+        frame2.pack();
         frame2.setVisible(true);
     }
 
