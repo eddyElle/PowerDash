@@ -56,7 +56,7 @@ public class Calc extends JPanel {
             unDoMath(input,dec,hex,oct,bin);
         });  
     }
-    public void doMath(StdTextFields input, StdTextFields dec, StdTextFields hex, StdTextFields oct, StdTextFields bin){
+    private void doMath(StdTextFields input, StdTextFields dec, StdTextFields hex, StdTextFields oct, StdTextFields bin){
         ArrayList<StdTextFields> fields = new ArrayList<>();
         int hist = 0; //history
         int sel = 0; //selector
@@ -117,7 +117,7 @@ public class Calc extends JPanel {
             System.out.println(e.getMessage());
         }
     }
-    public void unDoMath(StdTextFields input, StdTextFields dec, StdTextFields hex, StdTextFields oct, StdTextFields bin){
+    private void unDoMath(StdTextFields input, StdTextFields dec, StdTextFields hex, StdTextFields oct, StdTextFields bin){
         ArrayList<StdTextFields> fields = new ArrayList<>();
         fields.add(dec);
         fields.add(oct);

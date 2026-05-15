@@ -49,7 +49,7 @@ public class UnixConverter extends JPanel {
             humansText.clearAll();
         });
     }
-    public void humansToUnix(String toConvert){
+    private void humansToUnix(String toConvert){
         try {
             String normalizedInput = toConvert.trim().replace(" ", "T");
             DateTimeFormatter flexFormatter = new DateTimeFormatterBuilder()
@@ -70,7 +70,7 @@ public class UnixConverter extends JPanel {
             unixText.setText("Err: use ISO-8601[Z/±Off.]");
         }
     }
-    public void unixToHumans(String toConvert){
+    private void unixToHumans(String toConvert){
         try {
             long unixSeconds = Long.parseLong(toConvert);
             Instant instant = Instant.ofEpochSecond(unixSeconds);
