@@ -75,7 +75,7 @@ public class NotesPanel extends JPanel{
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         this.add(scroll,BorderLayout.CENTER);
     }
-    public void saveCont(JTextArea textArea) {
+    private void saveCont(JTextArea textArea) {
         JFileChooser file = new JFileChooser();
         file.setDialogTitle("Save file");
         int userSelection = file.showSaveDialog(null);
@@ -93,7 +93,7 @@ public class NotesPanel extends JPanel{
             }
         }
     }
-    public void loadCont(JTextArea textArea) {
+    private void loadCont(JTextArea textArea) {
     JFileChooser file = new JFileChooser();
     file.setDialogTitle("Open file");
     file.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Text files (.txt)", "txt"));

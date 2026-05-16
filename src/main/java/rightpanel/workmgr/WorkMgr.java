@@ -128,20 +128,20 @@ public class WorkMgr extends JPanel {
         hoursMins.setText(hours + "h " + mins + "min");
     }
     private void checkStatus() {
-    int currentMins = totalSeconds / 60;
-    int currentSecs = totalSeconds % 60;
+        int currentMins = totalSeconds / 60;
+        int currentSecs = totalSeconds % 60;
 
-    // updates Overworking state (8h+)
-    updateStatus();
+        // updates Overworking state (8h+)
+        updateStatus();
 
-    if (QuickSett.config.getBoolean("Breaks")) {
-        brkMins.setForeground(StdThings.getTextColor1());
-        increaseBrk.setEnabled(true);
-        decreaseBrk.setEnabled(true);
-        if (currentMins > 0 && currentMins % breakLimitMinutes == 0 && currentSecs == 0) {
-            startBlinking("TAKE A BREAK!", Color.YELLOW);
-        }
-    } else {
+        if (QuickSett.config.getBoolean("Breaks")) {
+            brkMins.setForeground(StdThings.getTextColor1());
+            increaseBrk.setEnabled(true);
+            decreaseBrk.setEnabled(true);
+            if (currentMins > 0 && currentMins % breakLimitMinutes == 0 && currentSecs == 0) {
+                startBlinking("TAKE A BREAK!", Color.YELLOW);
+            }
+        } else {
 
         if (copilot.getText().equals("TAKE A BREAK!")) {
             stopBlinking();
@@ -150,8 +150,8 @@ public class WorkMgr extends JPanel {
         brkMins.setForeground(StdThings.getGray1());
         increaseBrk.setEnabled(false);
         decreaseBrk.setEnabled(false);
+        }
     }
-}
 
     private void updateStatus() {
         if (!isPaused) {

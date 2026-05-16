@@ -36,7 +36,7 @@ public class HwMonitor extends JPanel {
         this.add(Pnet);
         start();
     }
-    public void start() {
+    private void start() {
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor(); //equivalent of setInterval in JS
         scheduler.scheduleAtFixedRate(this::displayStats, 0, 1, TimeUnit.SECONDS);
     }
