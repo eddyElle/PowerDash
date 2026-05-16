@@ -6,7 +6,7 @@ import share.StdThings;
 import java.awt.*;
 import java.awt.datatransfer.*;
 public class ClipboardPanel extends JPanel{
-    private JLabel clipBoard = new StdLabels("ClipBoard:");
+    private JLabel clipBoard = new StdLabels("ClipBoard(text):");
     private JButton btn1 = new StdButtons("Nothing to show");
     private JButton btn2 = new StdButtons("Nothing to show");
     private JButton btn3 = new StdButtons("Nothing to show");
