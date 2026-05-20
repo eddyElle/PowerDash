@@ -1,53 +1,44 @@
 # PowerDash
-PowerDash is a simple software to keep always on the second monitor,
-it has all the things that an IT guy, a developer or only a powerUser could neeed.
-so that you don't need to break your workflow to use common utilities that require
-more time to search and open than the time actually needed to do the job.
 
-## utilites included:
-- Notepad
-- ClipBoard (only for text)
-- Calculator
-- TaskManager (only components percentage)
-- Unix time converter
-- WorkFlow Manager
-  
+PowerDash is a simple software designed to be kept always-on on your second monitor. It packs everything an IT professional, developer, or power user might need, ensuring you don't break your workflow to use common utilities that often take more time to find and open than to actually use.
+<p align="center">
+<img width="631" height="604" alt="PowerDash screenshot" src="https://github.com/user-attachments/assets/e3f2a362-6fb6-4ed8-8520-8088528742a8" width="300" />
+</p>
+
+## Utilities Included
+
+* **Notepad**
+* **Clipboard Manager** (text only)
+* **Calculator & Base Converter**
+* **Task Manager** (component percentages only)
+* **Unix Time Converter**
+* **Workflow Manager**
+
+---
+
 # More Details
 
 ## Calculator
-it accepts complex expressions, and it will display the result in decimal, octal, hexadecimal and binary.
+It accepts complex expressions and instantly displays the result in **decimal, octal, hexadecimal, and binary** formats.
 
-## WorkFlow Manager
-over keeping track of the hours and mins worked it even has native time-tracking system based on the Pomodoro Technique,
-designed to optimize workflows and schedule regular breaks(it will notice you when it's time to do a break). 
-every session gets saved in the file work_log.txt that will always be in ~/Documents/PowerDash. 
+## Workflow Manager
+Beyond keeping track of your worked hours and minutes, it features a native time-tracking system based on the **Pomodoro Technique**, designed to optimize your workflow and schedule regular breaks (it will notify you when it's time to rest). 
+Every session is automatically saved in a `work_log.txt` file, located in `~/Documents/PowerDash`.
 
-## important note: 
-every converter can be used in both ways just time the value 
-you want to convert in the texfield that should be the result field, 
-this applies even for the calculator that doubles as a octal, hexadecimal and binary converter.
+## Important Note on Converters
+Every converter works **both ways**. If you want to convert a value back, simply type it into the corresponding result field. This bidirectional behavior also applies to the calculator, which doubles as an octal, hexadecimal, and binary converter.
+
+---
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+### Windows (x64)
+You can download the dedicated Windows installer from the [Releases](link-ai-tuoi-release) page.
 
+### Other OS (Linux / macOS)
+You can download the precompiled `fatJar`. Just make sure you have Java installed on your system. You can check your Java version by running: 
 ```bash
-pip install foobar
-```
-
-## Usage
-
-```python
-import foobar
-
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
+java --version
 ```
 
 ## Contributing
@@ -58,5 +49,4 @@ to discuss what you would like to change.
 Please make sure to update tests as appropriate.
 
 ## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
+[GPLv3](https://www.gnu.org/licenses/agpl-3.0.en.html)
