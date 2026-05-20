@@ -33,13 +33,14 @@ Every converter works **both ways**. If you want to convert a value back, simply
 ## Installation
 
 ### Windows (x64)
-You can download the dedicated Windows installer from the [Releases](link-ai-tuoi-release) page.
+You can download the dedicated Windows installer from the [Releases](https://github.com/eddyElle/PowerDash/releases/tag/FirstRelease) page.
 
 ### Other OS (Linux / macOS)
 You can download the precompiled `fatJar`. Just make sure you have Java installed on your system. You can check your Java version by running: 
 ```bash
 java --version
 ```
+you can find the `fatJar` on the [Releases](https://github.com/eddyElle/PowerDash/releases/tag/FirstRelease) page.
 
 ## Contributing
 
