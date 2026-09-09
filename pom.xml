@@ -47,7 +47,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>PowerMain</mainClass> <!-- main path hat to be inserted here -->
+                            <mainClass>ismain.PowerMain</mainClass> <!-- main path hat to be inserted here -->
                         </manifest>
                     </archive>
                     <descriptorRefs>

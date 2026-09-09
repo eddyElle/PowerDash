@@ -1,9 +1,10 @@
 package rightpanel;
 import javax.swing.*;
+
 import rightpanel.asciiconverter.AsciiConverter;
 import rightpanel.calc.Calc;
 import rightpanel.hwmonitor.HwMonitor;
-import rightpanel.quicksettings.QuickSett;
+import rightpanel.navigation.Navigation;
 import rightpanel.unixtimeconverter.UnixConverter;
 import rightpanel.workmgr.WorkMgr;
 import share.StdThings;
@@ -14,7 +15,7 @@ public class RightPanel extends JPanel {
     private JPanel asciiConverter = new AsciiConverter();
     private JPanel unixTimeConverter = new UnixConverter();
     private JPanel workMgr = new WorkMgr();
-    private JPanel quickSett = new QuickSett();
+    private JPanel quickSett = new Navigation(1);
     public RightPanel(){
         this.setBackground(StdThings.getGray1());
         this.setPreferredSize(new Dimension(285,463));

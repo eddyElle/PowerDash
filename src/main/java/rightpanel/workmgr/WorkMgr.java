@@ -1,5 +1,4 @@
 package rightpanel.workmgr;
-
 import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
@@ -8,7 +7,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import rightpanel.quicksettings.QuickSett;
 import share.StdButtons;
 import share.StdLabels;
 import share.StdTextFields;
@@ -24,16 +22,16 @@ public class WorkMgr extends JPanel {
     private StdButtons decreaseBrk = new StdButtons("-");
     private StdButtons increaseBrk = new StdButtons("+");
     private JButton finishDay = new StdButtons("End shift");
-    private JLabel brkMins = new StdLabels(String.valueOf(QuickSett.config.getInt("Breaks_min")));
+    private JLabel brkMins = new StdLabels(String.valueOf(settingspanel.Settings.config.getInt("Breaks_min")));
     private Timer timer;
     private Timer flashTimer;
     private int totalSeconds = 0;
-    private int breakLimitMinutes = QuickSett.config.getInt("Breaks_min");
+    private int breakLimitMinutes = settingspanel.Settings.config.getInt("Breaks_min");
     private boolean isPaused = true;
     private boolean isBlinking = false;
 
     public WorkMgr() {
-        if(QuickSett.config.getBoolean("Breaks") == false){
+        if(settingspanel.Settings.config.getBoolean("Breaks") == false){
             brkMins.setForeground(StdThings.getGray1());
             increaseBrk.setEnabled(false);
             decreaseBrk.setEnabled(false);
@@ -96,14 +94,14 @@ public class WorkMgr extends JPanel {
         increaseBrk.addActionListener(e -> {
             breakLimitMinutes++;
             brkMins.setText(String.valueOf(breakLimitMinutes));
-            QuickSett.config.setValue("Breaks_min", breakLimitMinutes);
+            settingspanel.Settings.config.setValue("Breaks_min", breakLimitMinutes);
         });
 
         decreaseBrk.addActionListener(e -> {
             if (breakLimitMinutes > 1) {
                 breakLimitMinutes--;
                 brkMins.setText(String.valueOf(breakLimitMinutes));
-                QuickSett.config.setValue("Breaks_min", breakLimitMinutes);
+                settingspanel.Settings.config.setValue("Breaks_min", breakLimitMinutes);
             }
         });
     }
@@ -134,7 +132,7 @@ public class WorkMgr extends JPanel {
         // updates Overworking state (8h+)
         updateStatus();
 
-        if (QuickSett.config.getBoolean("Breaks")) {
+        if (settingspanel.Settings.config.getBoolean("Breaks")) {
             brkMins.setForeground(StdThings.getTextColor1());
             increaseBrk.setEnabled(true);
             decreaseBrk.setEnabled(true);
