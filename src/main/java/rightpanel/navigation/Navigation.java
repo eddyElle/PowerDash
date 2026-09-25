@@ -9,9 +9,7 @@ public class Navigation extends JPanel{
     private StdButtons nextPage = new StdButtons("next ->");
     private StdButtons prevPage = new StdButtons("<- back");
     private StdButtons settings = new StdButtons("Settings"); 
-    private int number;
     public Navigation(int number){
-        this.number = number;
         this.setPreferredSize(new Dimension(280,45));
         this.setBackground(StdThings.getColor1());
         this.setLayout(new FlowLayout());
