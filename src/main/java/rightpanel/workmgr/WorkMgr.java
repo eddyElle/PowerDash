@@ -189,14 +189,11 @@ public class WorkMgr extends JPanel {
     }
 
     private void saveToFile() {
-        String userHome = System.getProperty("user.home");
-        File directory = new File(userHome + File.separator + "Documents" + File.separator + "PowerDash");
-        
+        File directory = StdThings.getDirectory();
         if (!directory.exists()) {
             directory.mkdirs();
             JOptionPane.showMessageDialog(this, "Created directory in: " + directory.getAbsolutePath());
         }
-
         File logFile = new File(directory, "work_log.txt");
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();

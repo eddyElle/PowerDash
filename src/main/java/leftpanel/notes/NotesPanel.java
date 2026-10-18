@@ -60,10 +60,10 @@ public class NotesPanel extends JPanel{
         this.notes.setPreferredSize(new Dimension(50,20));
         this.top.add(notes); 
         this.top.add(save);
+        this.top.add(load);
         this.save.addActionListener(e ->{
             saveCont(textArea);
         });
-        this.top.add(load);
         this.load.addActionListener(e -> {
             loadCont(textArea);
         });

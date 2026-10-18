@@ -5,6 +5,7 @@ import javax.swing.border.EmptyBorder;
 
 import configmanager.ConfigManager;
 import ismain.PowerMain;
+import settingspanel.history.HistoryPanel;
 import share.StdButtons;
 import share.StdThings;
 public class Settings extends JPanel {
@@ -15,6 +16,7 @@ public class Settings extends JPanel {
     public static ConfigManager config = new ConfigManager();
     private JPanel options = new JPanel();
     private JPanel betweenOP = new JPanel();
+    private JPanel history = new HistoryPanel();
     public Settings(){
         this.setBackground(StdThings.getGray1());
         this.setPreferredSize(new Dimension(285,463));
@@ -46,6 +48,8 @@ public class Settings extends JPanel {
         betweenOP.add(help);
         options.add(noBrk);
         this.add(options);
+        this.add(history);
+
     }
     private void showInitialStatus(StdButtons button, String key){
         if(config.getBoolean(key)){

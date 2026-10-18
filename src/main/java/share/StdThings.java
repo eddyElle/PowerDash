@@ -1,6 +1,7 @@
 package share;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.io.File;
 public class StdThings {
     private static Color color1 = new Color(29,29,32); //can be white or black
     private static Color textColor1 = Color.white; //but it can also be black
@@ -25,5 +26,18 @@ public class StdThings {
     }
     public static Color getTextColor1(){
         return textColor1;
+    }
+    public static File getDirectory(){
+        String os = System.getProperty("os.name").toLowerCase();
+        String userHome = System.getProperty("user.home");
+        File directory;
+        if(os.contains("win")){
+            String appData = System.getenv("APPDATA");
+            directory = new File(appData + File.separator + "PowerDashData");
+        }
+        else{
+            directory = new File(userHome + File.separator + ".PowerDashData");
+        }
+        return directory;
     }
 }
