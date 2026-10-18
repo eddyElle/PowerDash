@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.Properties;
 import javax.swing.JOptionPane;
 
+import share.StdThings;
+
 public class ConfigManager {
     private static final String FILE_NAME = "config.txt";
     private Properties props = new Properties();
@@ -12,8 +14,7 @@ public class ConfigManager {
 
     public ConfigManager() {
         // Questa parte gestisce la creazione della cartella Documents/PowerDash
-        String userHome = System.getProperty("user.home");
-        File directory = new File(userHome + File.separator + "Documents" + File.separator + "PowerDash");
+        File directory = StdThings.getDirectory();
         
         if (!directory.exists()) {
             directory.mkdirs();
