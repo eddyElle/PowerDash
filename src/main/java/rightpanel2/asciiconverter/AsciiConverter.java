@@ -1,4 +1,4 @@
-package rightpanel.asciiconverter;
+package rightpanel2.asciiconverter;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import share.StdButtons;

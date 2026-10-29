@@ -1,4 +1,4 @@
-package rightpanel.navigation;
+package rightpanel2.navigation;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import ismain.PowerMain;
