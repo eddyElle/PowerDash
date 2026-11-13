@@ -43,7 +43,7 @@ public class ConfigManager {
         props.setProperty("Breaks_min", "20");
     }
 
-    private void loadFromDisk() {
+    private void loadFromDisk() {  //important segment
         try (InputStream input = new FileInputStream(configFile)) {
             props.load(input);
         } catch (IOException ex) {

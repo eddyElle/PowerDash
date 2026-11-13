@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 import configmanager.ConfigManager;
 import ismain.PowerMain;
 import settingspanel.history.HistoryPanel;
+import settingspanel.quickremotemanager.remoteManager;
 import share.StdButtons;
 import share.StdThings;
 public class Settings extends JPanel {
@@ -17,6 +18,7 @@ public class Settings extends JPanel {
     private JPanel options = new JPanel();
     private JPanel betweenOP = new JPanel();
     private JPanel history = new HistoryPanel();
+    private JPanel remoteManager = new remoteManager();
     public Settings(){
         this.setBackground(StdThings.getGray1());
         this.setPreferredSize(new Dimension(285,463));
@@ -49,6 +51,7 @@ public class Settings extends JPanel {
         options.add(noBrk);
         this.add(options);
         this.add(history);
+        this.add(remoteManager);
 
     }
     private void showInitialStatus(StdButtons button, String key){
