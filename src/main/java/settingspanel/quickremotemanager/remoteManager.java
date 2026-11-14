@@ -1,13 +1,21 @@
 package settingspanel.quickremotemanager;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import share.StdButtons;
+import share.StdLabels;
 import share.StdTextFields;
 import share.StdThings;
-
-import java.util.ArrayList;
-import java.awt.*;
 public class remoteManager extends JPanel {
     public static ArrayList<Machine> machines;
     private String PANX_1 = "noMachines";
@@ -19,23 +27,29 @@ public class remoteManager extends JPanel {
     private JPanel noMachines = new JPanel();
     private JPanel machinesOverview = new JPanel();
     private JPanel insertLocalMachines = new JPanel();
-    private JPanel InsertRemoteMachines = new JPanel();
-    private JLabel nothingFound = new JLabel("no machines found");
+    private JPanel insertRemoteMachines = new JPanel();
+    private JPanel overviewTable = new JPanel();
+    private JLabel nothingFound = new StdLabels("no machines found");
     private JButton createMachine = new StdButtons("create machine");
     private JButton refreshMacOverview = new StdButtons("refresh");
-    private JButton LocalSave = new StdButtons("save");
-    private JButton RemoteSave = new StdButtons("save");
+    private JButton SaveLocal = new StdButtons("save");
+    private JButton SaveRemote = new StdButtons("save");
     private JButton addMachine = new StdButtons("add");
-    private JButton switchToRemote = new StdButtons("switch to remote");
+    private JButton cancelLocal = new StdButtons("cancel");
+    private JButton cancelRemote = new StdButtons("cancel");
     private JButton switchToLocal = new StdButtons("switch to local");
-    private JTextField name = new StdTextFields("name", getSize());
-    private JTextField macAddress = new StdTextFields("macAddress", getSize());
-    private JTextField execMethod = new StdTextFields("execMethod", getSize());
-    private JTextField relayIP = new StdTextFields("relayIP", getSize());
-    private JTextField relayPort = new StdTextFields("relayPort", getSize());
+    private JButton switchToRemote = new StdButtons("switch to remote");
+    private JTextField nameLocal = new StdTextFields("name", new Dimension(50,18));
+    private JTextField macAddressLocal = new StdTextFields("macAddress", new Dimension(50,18));
+    private JTextField execMethodLocal = new StdTextFields("execMethod", new Dimension(50,18));
+    private JTextField nameRemote = new StdTextFields("name", new Dimension(50,18));
+    private JTextField macAddressRemote = new StdTextFields("macAddress", new Dimension(50,18));
+    private JTextField execMethodRemote = new StdTextFields("execMethod", new Dimension(50,18));
+    private JTextField relayIP = new StdTextFields("relayIP", new Dimension(50,18));
+    private JTextField relayPort = new StdTextFields("relayPort", new Dimension(50,18));
     public remoteManager(){
         machines = greatWriter.loadMachines();
-        this.setPreferredSize(new Dimension(280,130));
+        this.setPreferredSize(new Dimension(280,170));
         this.setBackground(StdThings.getColor1());
         this.setLayout(new BorderLayout());
         this.setBorder(new EmptyBorder(0, 8, 8, 8));
@@ -43,15 +57,26 @@ public class remoteManager extends JPanel {
         container.add(noMachines,PANX_1);
         container.add(machinesOverview,PANX_2);
         container.add(insertLocalMachines,PANX_3);
-        container.add(InsertRemoteMachines,PANX_4);
+        container.add(insertRemoteMachines,PANX_4);
         //------------noMachines panel configutaration------
         noMachines.setLayout(new GridLayout(2,0));
+        noMachines.setBackground(StdThings.getColor1());
+        nothingFound.setHorizontalAlignment(JLabel.CENTER);
+        nothingFound.setVerticalAlignment(JLabel.CENTER);
         noMachines.add(nothingFound);
         noMachines.add(createMachine);
         createMachine.addActionListener(e -> {
             autoswipe.show(container, PANX_3);
         });
+        
         //------------MachinesOverview panel configuration---
+        JPanel overviewNav = new JPanel();
+        
+        machinesOverview.add(overviewNav,BorderLayout.NORTH);
+        machinesOverview.add(overviewTable,BorderLayout.CENTER);
+        overviewNav.setLayout(new GridLayout(0,2));
+        overviewNav.add(refreshMacOverview);
+        overviewNav.add(addMachine);
         refresh();
         refreshMacOverview.addActionListener(e -> {
             refresh();
@@ -59,39 +84,54 @@ public class remoteManager extends JPanel {
         addMachine.addActionListener(e -> {
             autoswipe.show(container, PANX_3);
         });
+        overviewNav.setBackground(StdThings.getColor1());
+        overviewTable.setBackground(StdThings.getColor1());
+        machinesOverview.setBackground(StdThings.getColor1());
+        
         //-----------InsertLocalMachine---------------
-        insertLocalMachines.add(switchToRemote);
+        JPanel localNav = new JPanel();
+        localNav.add(switchToRemote);
+        localNav.add(cancelLocal);
+        localNav.add(SaveLocal);
+        localNav.setBackground(StdThings.getColor1());
+        insertLocalMachines.setLayout(new GridLayout(4,0));
+        insertLocalMachines.add(localNav);
+        insertLocalMachines.add(nameLocal);
+        insertLocalMachines.add(macAddressLocal);
+        insertLocalMachines.add(execMethodLocal);
         switchToRemote.addActionListener(e -> {
             autoswipe.show(container, PANX_4);
         });
-        insertLocalMachines.add(name);
-        insertLocalMachines.add(macAddress);
-        insertLocalMachines.add(execMethod);
-        insertLocalMachines.add(LocalSave);
-        LocalSave.addActionListener(e -> {
-            if((name.getText() != "") && macAddress.getText() != "" ){
-                machines.add(new Machine(name.getText(), macAddress.getText(), false, execMethod.getText()));
+        SaveLocal.addActionListener(e -> {
+            if((nameLocal.getText() != "") && macAddressLocal.getText() != "" ){
+                machines.add(new Machine(nameLocal.getText(), macAddressLocal.getText(), false, execMethodLocal.getText()));
             }
             else{
                 JOptionPane.showMessageDialog(null, "you must insert name and MAC address of the machine");
             }
             greatWriter.saveMachines(machines);
         });
+        insertLocalMachines.setBackground(StdThings.getColor1());
         //-----------InsertRemoteMachine--------------
-        InsertRemoteMachines.add(switchToLocal);
+        JPanel remoteNav = new JPanel();
+        remoteNav.add(switchToLocal);
+        remoteNav.add(cancelRemote);
+        remoteNav.add(SaveRemote);
+        remoteNav.setBackground(StdThings.getColor1());
+        insertRemoteMachines.setLayout(new GridLayout(6,0));
+        insertRemoteMachines.add(remoteNav);
+        insertRemoteMachines.add(nameRemote);
+        insertRemoteMachines.add(macAddressRemote);
+        insertRemoteMachines.add(execMethodRemote);
+        insertRemoteMachines.add(relayIP);
+        insertRemoteMachines.add(relayPort);
         switchToLocal.addActionListener(e -> {
             autoswipe.show(container, PANX_3);
         });
-        InsertRemoteMachines.add(name);
-        InsertRemoteMachines.add(macAddress);
-        InsertRemoteMachines.add(relayIP);
-        InsertRemoteMachines.add(relayPort);
-        InsertRemoteMachines.add(execMethod);
-        InsertRemoteMachines.add(RemoteSave);
-        RemoteSave.addActionListener(e -> {
+        SaveRemote.addActionListener(e -> {
             try {
-                if((name.getText() != "") && macAddress.getText() != "" && relayIP.getText() != "" && relayPort.getText() != ""){
-                    machines.add(new Machine(name.getText(), macAddress.getText(), true, execMethod.getText(), relayIP.getText(), Integer.parseInt(relayPort.getText())));
+                if((nameRemote.getText() != "") && macAddressRemote.getText() != "" && relayIP.getText() != "" && relayPort.getText() != ""){
+                    machines.add(new Machine(nameRemote.getText(), macAddressRemote.getText(), true, execMethodRemote.getText(), relayIP.getText(), Integer.parseInt(relayPort.getText())));
                 }    
                 else{
                     JOptionPane.showMessageDialog(null, "you must insert name and MAC address of the machine you want to reach, and IP addres and port of the server you need to contact before");
@@ -101,7 +141,19 @@ public class remoteManager extends JPanel {
             }
             greatWriter.saveMachines(machines);
         });
+       
+        insertRemoteMachines.setBackground(StdThings.getColor1());
+        
         //---------------------------------------------------------
+        panelInit();
+        cancelRemote.addActionListener(e -> {
+            panelInit();
+        });
+        cancelLocal.addActionListener(e -> {
+            panelInit();
+        });
+    }
+    public void panelInit(){
         if(machines.isEmpty()){
             autoswipe.show(container, PANX_1);
         }
@@ -111,17 +163,15 @@ public class remoteManager extends JPanel {
     }
     public static void deletes(int i){
         machines.remove(i);
+        greatWriter.saveMachines(machines);
     }
     public void refresh(){ //real machines panel configuaration
-        machinesOverview.removeAll();
-        machinesOverview.setLayout(new GridLayout(rows(),5));
-        machinesOverview.add(refreshMacOverview);
-        machinesOverview.add(addMachine);
+        overviewTable.removeAll();
+        overviewTable.setLayout(new GridLayout(rows(),5));
         for(int i=0; i<machines.size();i++){
             machinesOverview.add(new miniMacPanel(machines.get(i).getName(), i));
 
         }
-
     }
     public int rows(){
         int row = 0;
