@@ -2,13 +2,11 @@ package settingspanel.quickremotemanager;
 import java.util.ArrayList;
 import java.awt.*;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicScrollBarUI;
 import share.StdScroll;
 import share.StdButtons;
 import share.StdLabels;
@@ -49,7 +47,7 @@ public class remoteManager extends JPanel {
     private static StdTextFields relayIP = new StdTextFields("relayIP (IPV4)", new Dimension(50,18));
     private static StdTextFields relayPort = new StdTextFields("relayPort", new Dimension(50,18));
     private static int[] index = { 0 };
-    private JScrollPane tableScroll = new JScrollPane(overviewTable);
+    private JScrollPane tableScroll = new StdScroll(overviewTable);
     private static ActionListener saveNormalRemote = e -> {
         try {
             if((getChecked(nameRemote.getText(), macAddressRemote.getText()).equals("")) && getCheckedRemote(relayIP.getText(), relayPort.getText()).equals("")){
@@ -144,6 +142,7 @@ public class remoteManager extends JPanel {
         JPanel overviewNav = new JPanel();
         
         machinesOverview.add(overviewNav,BorderLayout.NORTH);
+        machinesOverview.add(tableScroll,BorderLayout.CENTER);
         overviewNav.setLayout(new GridLayout(0,2));
         overviewNav.add(refreshMacOverview);
         overviewNav.add(addMachine);
@@ -160,6 +159,7 @@ public class remoteManager extends JPanel {
         overviewNav.setBackground(StdThings.getColor1());
         overviewTable.setBackground(StdThings.getColor1());
         machinesOverview.setBackground(StdThings.getColor1());
+
         
         //-----------InsertLocalMachine---------------
         JPanel localNav = new JPanel();
@@ -207,42 +207,7 @@ public class remoteManager extends JPanel {
         insertRemoteMachines.setBackground(StdThings.getColor1());   
         //-------------------emptySwitchPanelConfigurationn------------------------
         emptySwitchPanel.setBackground(StdThings.getColor1());
-        //-------------------scrollPaneConfiguration
-        tableScroll.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
-            @Override
-            protected void configureScrollBarColors() {
-                this.trackColor = StdThings.getColor1();
-            }
-
-            @Override
-            protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
-                g.setColor(StdThings.getGray1());
-                g.fillRect(thumbBounds.x + 2, thumbBounds.y + 2, 
-                           thumbBounds.width - 4, thumbBounds.height - 4);
-            }
-
-            @Override
-            protected JButton createDecreaseButton(int orientation) {
-                return createZeroButton();
-            }
-
-            @Override
-            protected JButton createIncreaseButton(int orientation) {
-                return createZeroButton();
-            }
-
-            private JButton createZeroButton() {
-                JButton jbutton = new JButton();
-                jbutton.setPreferredSize(new Dimension(0, 0));
-                jbutton.setMinimumSize(new Dimension(0, 0));
-                jbutton.setMaximumSize(new Dimension(0, 0));
-                return jbutton;
-            }
-        });
-        tableScroll.setBackground(StdThings.getColor1());
-        tableScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        machinesOverview.add(tableScroll,BorderLayout.CENTER);
-        //----------------------------------------------------------
+       //----------------------------------------------------------
         panelInit();
         cancelRemote.addActionListener(e -> {
             SaveRemote.removeActionListener(saveNormalRemote);

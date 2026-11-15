@@ -3,11 +3,19 @@ import java.awt.*;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.JPanel;
 public class StdScroll extends JScrollPane {
-    StdScroll(JPanel panel){
+    public StdScroll(JPanel panel){
         super(panel);
+        settings();
+    }
+    public StdScroll(JTextArea textArea){
+        super(textArea);
+        settings();
+    }
+    private void settings(){
         this.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
             @Override
             protected void configureScrollBarColors() {

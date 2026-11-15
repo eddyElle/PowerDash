@@ -8,10 +8,10 @@ import java.nio.file.Path;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicScrollBarUI;
 
 import share.StdButtons;
 import share.StdLabels;
+import share.StdScroll;
 import share.StdThings;
 public class HistoryPanel extends JPanel {
     private JTextArea textArea = new JTextArea();
@@ -20,39 +20,8 @@ public class HistoryPanel extends JPanel {
     private JButton clear = new StdButtons("Clear");
     private JButton locate = new StdButtons("Locate");
     private JButton referesh = new StdButtons("Refresh");
-    private JScrollPane scroll = new JScrollPane(textArea);
+    private JScrollPane scroll = new StdScroll(textArea);
     public HistoryPanel(){
-        scroll.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
-            @Override
-            protected void configureScrollBarColors() {
-                this.trackColor = StdThings.getColor1();
-            }
-
-            @Override
-            protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
-                g.setColor(StdThings.getGray1());
-                g.fillRect(thumbBounds.x + 2, thumbBounds.y + 2, 
-                           thumbBounds.width - 4, thumbBounds.height - 4);
-            }
-
-            @Override
-            protected JButton createDecreaseButton(int orientation) {
-                return createZeroButton();
-            }
-
-            @Override
-            protected JButton createIncreaseButton(int orientation) {
-                return createZeroButton();
-            }
-
-            private JButton createZeroButton() {
-                JButton jbutton = new JButton();
-                jbutton.setPreferredSize(new Dimension(0, 0));
-                jbutton.setMinimumSize(new Dimension(0, 0));
-                jbutton.setMaximumSize(new Dimension(0, 0));
-                return jbutton;
-            }
-        });
         this.setPreferredSize(new Dimension(280,130));
         this.setBackground(StdThings.getColor1());
         this.setLayout(new BorderLayout());
@@ -81,8 +50,6 @@ public class HistoryPanel extends JPanel {
         textArea.setForeground(StdThings.getTextColor1());
         textArea.setCaretColor(StdThings.getTextColor1());
         textArea.setLineWrap(true);
-        scroll.setBackground(StdThings.getColor1());
-        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         this.add(scroll,BorderLayout.CENTER);
     }
     private void loadCont(JTextArea textArea){
