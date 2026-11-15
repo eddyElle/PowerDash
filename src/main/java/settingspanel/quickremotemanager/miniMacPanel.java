@@ -25,6 +25,9 @@ public class miniMacPanel extends JPanel {
         delete.addActionListener(e -> {
             remoteManager.deletes(index);
         });
+        edit.addActionListener(e -> {
+            remoteManager.edites(index);
+        });
     }
 
 }
