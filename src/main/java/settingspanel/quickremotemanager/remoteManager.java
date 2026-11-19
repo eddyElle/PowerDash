@@ -47,6 +47,7 @@ public class remoteManager extends JPanel {
     private static StdTextFields relayIP = new StdTextFields("relayIP (IPV4)", new Dimension(50,18));
     private static StdTextFields relayPort = new StdTextFields("relayPort", new Dimension(50,18));
     private static int[] index = { 0 };
+    private boolean reminderCheck = false;
     private JScrollPane tableScroll = new StdScroll(overviewTable);
     private static ActionListener saveNormalRemote = e -> {
         try {
@@ -143,8 +144,7 @@ public class remoteManager extends JPanel {
         
         machinesOverview.add(overviewNav,BorderLayout.NORTH);
         machinesOverview.add(tableScroll,BorderLayout.CENTER);
-        overviewNav.setLayout(new GridLayout(0,2));
-        overviewNav.add(refreshMacOverview);
+        overviewNav.setLayout(new GridLayout(0,1));
         overviewNav.add(addMachine);
         refresh();
         refreshMacOverview.addActionListener(e -> {
@@ -180,6 +180,8 @@ public class remoteManager extends JPanel {
             execMethodRemote.clearAll();
             relayIP.clearAll();
             relayPort.clearAll();
+            hint(reminderCheck);
+           
 
         });
         SaveLocal.addActionListener(saveNormalLocal);
@@ -275,7 +277,6 @@ public class remoteManager extends JPanel {
         }
         machinesOverview.revalidate();
         machinesOverview.repaint();
-        
     }
     public static String getChecked(String name, String macAddress){
         if(macAddress.equals("macAddress") || name.equals("name (max 6 char)")){
@@ -308,16 +309,31 @@ public class remoteManager extends JPanel {
             }
             String[] ipChecker = ip.split("\\.");
             if(ipChecker.length > 4 || ipChecker.length < 4){
-                return "invalid IP address" + ipChecker.length;
+                return "invalid IP address";
             }
             for(int i=0;i<ipChecker.length;i++){
-                Integer.parseInt(ipChecker[i]);
-                
+                if(Integer.parseInt(ipChecker[i]) > 255){
+                    return "max ip number is 255";
+                };
             }
             Integer.parseInt(port);
             return "";
         } catch (Exception e) {
             return "IP and port must be composed by numbers";
         }
+    }
+    public boolean hint(boolean reminder){
+        int i2 = 0;
+        if(reminder == false){
+            for(int i=0;i<machines.size();i++){
+                if(machines.get(i).getConnType() == true){
+                    i2++;
+                }
+            }
+            if(i2 < 1){
+                JOptionPane.showMessageDialog(null, "we reccomend you to read PowerDash doumentation before using remote WOL function"); //add openDoucumentation on the correct place
+            }
+        }
+        return true;
     }
 }

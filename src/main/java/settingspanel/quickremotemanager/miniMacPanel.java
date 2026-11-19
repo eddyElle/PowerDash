@@ -19,9 +19,6 @@ public class miniMacPanel extends JPanel {
         nameLabel.setHorizontalAlignment(JLabel.CENTER);
         nameLabel.setVerticalAlignment(JLabel.CENTER);
         this.setBackground(StdThings.getGray1());
-        edit.addActionListener(e -> {
-
-        });
         delete.addActionListener(e -> {
             remoteManager.deletes(index);
         });
